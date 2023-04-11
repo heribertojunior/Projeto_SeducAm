@@ -1,0 +1,33 @@
+{% extends 'model.html' %}
+{% load static %}
+
+{% block conteudo %}
+<div class="row">
+    <h1>Lista de Resultados</h1>
+</div>
+<div class="row top-buffer">
+    <a class="btn btn-primary" href="{% url 'form' %}" role="button">Novo Relatório</a>
+</div>
+<div class="row top-buffer">
+    <table class="table table-bordered">
+        {% for pessoa in lista %}
+        <tr>
+            <td>
+                {{ pessoa.professor }}
+                <ul>
+                    {% for t in pessoa.adicionais.all %}
+                    <li>{{ t.matéria }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>Nenhum resgistro</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock conteudo %}

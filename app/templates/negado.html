@@ -1,0 +1,18 @@
+{% extends 'model.html' %}
+{% load static %}
+
+{% block conteudo %}
+<body>
+ <main>
+    <div class="text">
+        Usuário ou senha inválida.
+    </div>
+    <div class="texto">
+        Clique no botão para acessar o Login.
+    </div>           
+    <div class="entrar-button">
+        <button onclick="teste.html"><a href="{% url 'inicio' %}">Login</a></button>
+    </div>
+ </main>        
+</body>    
+{% endblock conteudo %}

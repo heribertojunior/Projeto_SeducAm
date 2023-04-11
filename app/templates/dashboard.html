@@ -1,0 +1,29 @@
+{% extends 'model.html' %}
+{% load static %}
+
+{% block conteudo %}
+
+
+
+<div class="container">
+    <table>
+      <td>
+        <tr><h4>Cumprimento do curriculo</h4></tr>
+        <tr><canvas id="cumprimento_curriculo" width="250" height="200"></canvas></tr>
+      </td>
+    </table>
+</div>
+
+
+
+
+{% endblock conteudo %}
+{% block scripts %}
+<script src="{% static 'js/js.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  window.onload = function(event) {
+    renderiza_cumprimento('{% url "cumprimento" %}')
+  };
+</script>
+{% endblock scripts %}

@@ -1,0 +1,54 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cumprimento do Currículo</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/NIG.png' %}"/>
+
+    <style>
+        .top-buffer { margin-top:20px; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark static-top" style="background-color: #202f58;">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <div class ="text-left">
+            <h1><a href="https://www.amazonas.am.gov.br/" target="_blank" ><img src="{% static 'img/GOVERNO.png' %}" width="100px" height="30px"></a>
+            <a href="http://www.seduc.am.gov.br/" target="_blank" ><img src="{% static 'img/SEDUC.png' %}" width="100px" height="30px"></a>
+            <img src="{% static 'img/NIG.png' %}" width="90px" height="90px"></h1>
+            </div>
+          <ul class="navbar-nav ml-auto">
+              <a class="nav-link" href="{% url 'inicio' %}">Início</a>
+              <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <br><br>
+        {% block conteudo %} {% endblock conteudo %}
+    </div>
+    <!-- /.container -->
+    <script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    {% block scripts %}
+    {% endblock scripts %}
+</body>
+</html>

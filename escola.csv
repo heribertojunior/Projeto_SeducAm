@@ -1,0 +1,618 @@
+id;escola;coordenadoria_id
+1;EETI Antonio Teles de Souza;1
+2;EETI Hermenegildo de Campos;1
+3;Ceja Profa. Jacira Caboclo;1
+4;EE Getulio Vargas;1
+5;EETI Helena Araujo;1
+6;EE Izabel Barroncas;1
+7;EE Marcio Nery;1
+8;EE Padre Agostinho Martin;1
+9;EETI Conego Azevedo;1
+10;EE Nossa Senhora Aparecida;1
+11;EE Vicente Schettini;1
+12;EE Prof. Antenor Sarmento;1
+13;EE Princeza Isabel;1
+14;EE Profa. Eunice Serrano Telles de Souza;1
+15;EETI Ribeiro da Cunha;1
+16;Instituto de Educacao do Amazonas;1
+17;Colegio Amazonense Dom Pedro II;1
+18;Colegio Brasileiro Pedro Silvestre;1
+19;EE Barao do Rio Branco;1
+20;EE Augusto Carneiro dos Santos;1
+21;EE Diofanto Vieira Monteiro;1
+22;EE Frei Silvio Vagheggi;1
+23;EE Farias Britto;1
+24;EE Prof. Francisco Das Chagas de Souza Albuquerque;1
+25;Ceja Prof. Paulo Freire;1
+26;EE Luizinha Nascimento;1
+27;EE Placido Serrano;1
+28;EE 1º de Maio;1
+29;EE Santa Luzia;1
+30;EE Balbina Mestrinho;1
+31;EE Carvalho Leal;1
+32;EE Euclydes da Cunha;1
+33;EE Ruy Araujo;1
+34;EE Manoel Marcal de Araujo;1
+35;EE Giovanni Figliuolo;1
+36;EE Almirante Ernesto Mello Baptista;2
+37;EE Estelita Tapajos;2
+38;EETI Machado de Assis;2
+39;EE Monteiro de Souza;2
+40;CETI Gilberto Mestrinho de Medeiros Raposo;2
+41;EE Profa. Diana Pinheiro;2
+42;EE J. G. Araujo;2
+43;EE Alfredo Campos;2
+44;EE Lucinda Felix de Azevedo;2
+45;EE Luis de Camoes;2
+46;EE Nathalia Uchoa;2
+47;EE Profa. Ondina de Paula Ribeiro;2
+48;EE Prof. Benicio Leao;2
+49;EE Nossa Senhora da Divina Providencia;2
+50;EE Prof. Nelson Alves Ferreira;2
+51;EE Milburges Araujo;2
+52;EE Senador Cunha Melo;2
+53;EETI Isaac Benzecry;2
+54;EE Mestre Otilio;2
+55;EETI Profa. Roxana Pereira Bonessi;2
+56;EE Major Silva Coutinho;2
+57;EE Sant Ana;2
+58;EETI Prof. Djalma da Cunha Batista;2
+59;Colegio Militar da Policia Militar do Amazonas;2
+60;EE Tiradentes;2
+61;EETI Profa. Jacimar da Silva Gama;2
+62;Anexo do Colegio Militar da Policia Militar do Amazonas I;2
+63;EE Bom Pastor;2
+64;EE Dorval Porto;2
+65;EETI Jose Carlos Mestrinho;2
+66;EE Adalberto Vale;2
+67;EE Antonio de Lucena Bittencourt;2
+68;EE Paula Angela Frassinetti;2
+69;EE Leopoldo Neves;2
+70;EETI Madre Tereza de Calcuta;2
+71;EE Brig. Joao Camarao Telles Ribeiro;2
+72;EE Senador Antovila Mourao Vieira;2
+73;Anexo EE Jacimar S Gama;2
+74;EE Solon de Lucena;3
+75;EE Vicente Telles;3
+76;EE Maria da Luz Calderaro;3
+77;EETI Maria Rodrigues Tapajos;3
+78;EE Tereza de Jesus Azevedo de Vasconcelos Dias;3
+79;EE Thome de Medeiros Raposo;3
+80;EETI Santa Terezinha;3
+81;EE Angelo Ramazzotti;3
+82;EE de Atendimento Especial Mayara Redman Abdel;3
+83;EE Menino Jesus de Praga;3
+84;EE Olga Falcone;3
+85;EE Aderson de Menezes;3
+86;EE Profa. Alice Salerno Gomes de Lima;3
+87;EETI Altair Severiano Nunes;3
+88;EE Profa. Leonilia Marinho;3
+89;EE Profa. Alda Barata;3
+90;EE Ten. Coronel Candido Jose Mariano;3
+91;EETI Francisca Botinelly Cunha E Silva;3
+92;EETI Goncalves Dias;3
+93;EE Maria Amelia do Espirito Santo;3
+94;EETI Senador Petronio Portella;3
+95;EE Raimundo Gomes Nogueira;3
+96;EE Rosina Ferreira da Silva;3
+97;EE Humberto de Campos;3
+98;EE Francelina Dantas;3
+99;EE Senador Manuel Severiano Nunes;3
+100;EETI Maria de Lourdes Rodrigues Arruda;3
+101;EE Prof. Waldir Garcia;3
+102;Anexo da EE Josephina de Melo - Dagmar Feitosa;3
+103;Anexo da EE Josephina de Melo - Marise Mendes;3
+104;EE Profa. Adelaide Tavares de Macedo;3
+105;EE Terezinha Almeida da Silva;3
+106;Anexo da EE Josephina de Melo - Raimundo Parente;3
+107;EETI Almirante Barroso;3
+108;EE Arthur Araujo;3
+109;EE Herbert Palhano;3
+110;EETI Profa Leonor Santiago Mourao;3
+111;EETI Nossa Senhora Das Gracas;3
+112;EE Jose Bentes Monteiro;3
+113;EE Simon Bolivar;3
+114;Ceja Prof. Agenor Ferreira Lima;3
+115;EE Amelia Bittencourt Cardinale;4
+116;EE Benjamin Magalhaes Brandao;4
+117;EE Duque de Caxias;4
+118;EE Senador Flavio da Costa Brito;4
+119;EE Julia Bittencourt;4
+120;EE Pe Pedro Gislandy;4
+121;EE Waldemiro Peres Lustoza;4
+122;EE Joao Bosco Pantoja Evangelista;4
+123;EE Coronel Pedro Camara;4
+124;EE Fueth Paulo Mourao;4
+125;EE General Sampaio;4
+126;EE Isaac Benayon Sabba;4
+127;EE Presidente Castelo Branco;4
+128;EETI Zulmira Bittencourt;4
+129;EE Agnello Bittencourt;4
+130;CETI Aurea Pinheiro Braga;4
+131;EETI Liberalina Weill;4
+132;EETI Governador Melo Povoas;4
+133;EE Santo Antonio;4
+134;EE Antonio Bittencourt;4
+135;EE Joanna Rodrigues Vieira;4
+136;EE Nª Sª da Gloria;4
+137;EETI Marques de Santa Cruz;4
+138;EE Olavo Bilac;4
+139;EE Pedro Silvestre;4
+140;EE Sao Luiz de Gonzaga;4
+141;EE Marechal Hermes;4
+142;EETI Irma Adonai Politi;4
+143;EE Antonio da Encarnacao Filho;4
+144;EE Prof. Jose Ribamar da Costa;4
+145;EE Itacyara Nogueira Pinho;4
+146;EE Alfredo Fernandes;4
+147;EE Samsung Amazonas;4
+148;EE Profa. Bernardete do Socorro Trindade da Rocha;5
+149;EE Dr Isaac Sverner;5
+150;EE Dom Jacson Damasceno Rodrigues;5
+151;EE Roderick de Castello Branco;5
+152;EE Ernesto Penafort;5
+153;EE Prof. Jorge Karam Neto;5
+154;EE Prof. Rofran Belchior da Silva;5
+155;EE Gilberto Mestrinho;5
+156;EE Manuel Antonio de Souza;5
+157;EE Jairo da Silva Rocha;5
+158;EE Prof. Ernane Nascimento Simao;5
+159;EE Aurea Pinheiro Braga;5
+160;EETI Irma Gabrielle Cogels;5
+161;Anexo da EE Irma Gabrielle Cogels;5
+162;EE Prof. Aristoteles Comte de Alencar;5
+163;EE Cacilda Braule Pinto;5
+164;EE Dep Josue Claudio de Souza;5
+165;EETI Profa Maria Arminda Guimaraes de Andrade;5
+166;EE Profa. Myrthes Marques Trigueiro;5
+167;EE Prof. Reinaldo Thompson;5
+168;EE Prof. Antonio Maurity Monteiro Coelho;5
+169;EE Maria Teixeira Goes;5
+170;EE Padre Luis Ruas;5
+171;EE Antonio Nunez Jimenez;5
+172;EETI Maria Madalena Santana de Lima;5
+173;EE Rilton Leal Filho;5
+174;EE Manuel Rodrigues de Souza;5
+175;EE Benedito Almeida;5
+176;EE Vasco Vasques;5
+177;EE Prof. Cleomenes do Carmo Chaves;5
+178;EE Prof. Demostenes Belduque Araujo Travessa;5
+179;EE Profa. Cecilia Ferreira da Silva;5
+180;CETI Elisa Bessa Freire;5
+181;CETI Profa. Cinthia Regia Gomes Do Livramento;5
+182;CETI Eng. Prof. Sergio Alfredo Pessoa Figueiredo;5
+183;Anexo da EE Prof Cleomenes Do Carmo Chaves III;5
+184;EE Elira Pinheiro;6
+185;EE Leticio de Campos Dantas;6
+186;EE Profa. Wilma Vitoriano Geber;6
+187;EE Frei Mario Monacelli;6
+188;EE D. Milton Correa Pereira;6
+189;EE Profa. Lenina Ferraro da Silva;6
+190;EE Profa. Hilda de Azevedo Tribuzy;6
+191;EE Senador Joao Bosco Ramos de Lima;6
+192;EE Desembargador Andre Vidal de Araujo;6
+193;EE Dom Joao de Souza Lima;6
+194;EE Dr Jose Milton Bandeira;6
+195;EE Francisca de Paula de Jesus Izabel;6
+196;EE Homero de Miranda Leao;6
+197;EETI Maria do Ceu Vaz D'Oliveira;6
+198;EETI Cid Cabral da Silva;6
+199;EE Profa. Sebastiana Braga;6
+200;EETI Marcantonio Vilaca;6
+201;EE Prof. Julio Cesar de Moraes Passos;6
+202;EE Profa. Ruth Prestes Goncalves;6
+203;EE Raio de Sol;6
+204;EE Marcantonio Vilaca Ii;6
+205;EE Engº Arthur Amorim;6
+206;EE Osmar Pedrosa;6
+207;EE Prof. Jose Bernardino Lindoso;6
+208;EE Prof. Juracy Batista Gomes;6
+209;EE Belarmino Marreiro;6
+210;EE Raimunda Holanda de Souza;6
+211;EE Prof. Waldocke Fricke de Lyra;7
+212;CETI Prof. Garcitylzo Do Lago E Silva;7
+213;EE Profa. Karla Patricia Barros de Azevedo;7
+214;EE Inspetora Dulcineia Varela Moura;7
+215;EE Arlindo Vieira dos Santos;7
+216;Anexo da EE Arlindo Vieira dos Santos - I;7
+217;EETI Rafaiel Henrique Pinheiro dos Santos;7
+218;EE Profa. Ana Lucia de Moraes Costa E Silva;7
+219;CETI Dra Zilda Arns Neumann;7
+220;EE Eliana Socorro Pacheco Braga;7
+221;EE Profa. Eliana de Freitas Morais;7
+222;EE Senador Evandro Das Neves Carreira;7
+223;CETI Dariana Zuleica Correa Lopes;7
+224;CETI Joao Dos Santos Braga;7
+225;EETI Profa. Lecita Fonseca Ramos;7
+226;EE Antogildo Pascoal Viana;7
+227;EE Sebastiao Noroes;7
+228;EE Prof. Dorval Varela Moura;7
+229;EE Ernesto Pinho Filho;7
+230;EE Prof. Samuel Benchimol;7
+231;EE Prof. Ruy Alencar;7
+232;EE Prof. Roberto dos Santos Vieira;7
+233;EE Prof. Sebastiao Augusto Loureiro Filho;7
+234;EE Profa. Tereza Siqueira Tupinamba;7
+235;EE Profa. HaydEE Cabral Lyra;7
+236;EE Senador Jefferson Carpinteiro Peres;7
+237;EE Ayrton Senna;7
+238;EE Ana Neire Marques da Silva;7
+239;EE Dra Zilda Arns Neumann;7
+240;Centro Educacional Arthur Virgilio Filho;7
+241;EE Prof. Octavio Mourao;7
+242;Anexo da EE Ayrton Senna;7
+243;EE Prof. Gilberto Mestrinho;8
+244;EE Prof. Johannes Petrus;8
+245;EE Senador Fabio Lucena;8
+;EE Amatura;9
+;EE Indigena Manuel Joaquim Saldanha Filho Tchaiareecu;9
+;EE Duque de Caxias;10
+;EE Jesuina Regis;10
+;EE Maria Nogueira Marques;10
+;EE Tancredo Neves;10
+;EE Alcinda Pinheiro Costa;10
+;EE Almerinda Nogueira Uchoa Izel;11
+;EE Eurico Gaspar Dutra;11
+;EETI Presidente Costa E Silva;11
+;EE Prof. Gilberto Mestrinho;12
+;EE Profa. Maria Curtarelli Lira;12
+;EE Carmozina Baima de Almeida;13
+;EE Pio Veiga;13
+;EE Profa. Tereza Lemos de Oliveira Santos;13
+;EE Marechal Castello Branco;13
+;EE Tenente Rufino;13
+;EE Izaura Torres da Silva;14
+;EE Raymundo Sa;14
+;EE Vidal Gomes de Melo;14
+;EE Maria Emilia Martins Mestrinho de Medeiros Raposo;14
+;EE Pedro Santarem Penalber;14
+;EE Novo Ceu;14
+;Anexo da EE Raymundo Sa;14
+;EE Angelina Palheta Mendes;15
+;EE Pe Joao Badalotti;15
+;EE Sao Francisco de Sales;15
+;EE Prof. Octaviano Cardoso;16
+;EE Padre Seixas;16
+;EE Antonio Belchior Cabral;16
+;EETI Profª Maria Belem;16
+;EE Senador Joao Bosco;16
+;EE Nilo Pereira;16
+;EE Julio Cesar da Costa;16
+;EE Jacy Dutra;16
+;EE Coronel Raymundo Cunha;17
+;EE Nossa Senhora da Imaculada Conceicao;17
+;EE Profa. Rosa Cruz;17
+;EE Indigena Cacique Manuel Florentino Mecuracu;17
+;EE Indigena Prof. Gildo Sampaio Megatanucu;17
+;EE Indigena Profª. Daria Gabriel Quirino;17
+;CETI Prof. Aristelio Sabino de Oliveira;17
+;EE Getulio Vargas;18
+;EE Prof. Gilberto Mestrinho;18
+;EETI Euclides Correa Vieira;18
+;EE Senador Jose Esteves;19
+;EE Prof. Raimundo Benedito Costa;19
+;EE Darcy Augusto Michiles;19
+;EE Profa. Gercilia Barbosa Sampaio;19
+;EE Almirante Barroso;20
+;EE Barao de Boca do Acre;20
+;EE Cel Jose de Assuncao;20
+;EETI Danilo Correa;20
+;EE Jacinto Ale;20
+;EE Joao Gabriel;20
+;EE Jose Leite;20
+;EE Lucas Pena;20
+;EE N.ª S.ª Aparecida;20
+;EETI Prof. Antonio Jose Bernardo Vasconcelos;20
+;CETI Boca do Acre;20
+;EETI Balbina Mestrinho;21
+;EE Benedito Gumercindo de Souza;21
+;EE Conego Bento Jose de Souza;21
+;EE Joao Ferreira da Fonseca;21
+;EE Lothar Sussman;21
+;EE Monsenhor Coutinho;21
+;EE Nossa Senhora do Rosario;21
+;EE Prof. Lourenco Rodrigues da Motta;21
+;EE Senador Alvaro Maia;21
+;EE Indigena Ester Caldeira Cardoso;21
+;EE Indigena Laranjal;21
+;EE Indigena Agostinho de Goes;21
+;CETI Jose Holanda Cavalcante;21
+;EE Carmina de Castro;22
+;EE Hermogenes Saraiva;22
+;EE Justina Pires Nogueira;22
+;EE Tancredo de Almeida Neves;23
+;EE Frei Isidoro Irigoyen Unanua;23
+;EE Belarmino Gomes de Albuquerque;24
+;EE Cel Alfredo Marques da Silveira;24
+;EE Profa. Nazare Varela;24
+;EE Sao Jose;24
+;EE Nair Alves da Silva;24
+;EE Osvaldo Nascimento;24
+;EETI Sergio Rufino de Oliveira;24
+;EETI Carauari;24
+;EE Saturnino Maraes Neto;24
+;CETI Prof. Pedro Alves Da Silva;24
+;EE Marcal Machado Girao;25
+;EE Pedro dos Santos;25
+;EE Thome Ferreira Santiago;25
+;EE Senador Fabio Lucena;25
+;CETI Profa. Maria Adelaide Marinho Hortencia;25
+;EE Cel. Fiuza;26
+;EE Tancredo de Almeida Neves;26
+;EE Vital de Andrade Brandao;26
+;EE Antonio Ferreira Guedes;26
+;EE Alberto Santos Migueis;26
+;EE Tiburcio Alves Mogeiro;26
+;EE Diamantina Ribeiro de Oliviera;27
+;EE Dom Mario;27
+;EE Francisco Lopes Braga;27
+;EE Ines de Nazare Vieira;27
+;EE Iraci Leitao;27
+;EE Joao Vieira;27
+;EE N. S. Perpetuo Socorro;27
+;EE Presidente Kennedy;27
+;EE Prof. Gilberto Mestrinho;27
+;EE Thome de Medeiros Raposo;27
+;Instituto Bereano de Coari;27
+;EE Francisca Evangelista da Silva;27
+;EE Maria Almeida do Nascimento;27
+;EE Prefeito Alexandre Montoril;27
+;CETI Prof. Manuel Vicente Ferreira Lima;27
+;EE Prof. Gilberto Mestrinho de Medeiros Raposo;28
+;EE Jose Melo de Oliveira;28
+;EE Rodrigo Costa;28
+;EE Costa E Silva;28
+;EE Wilson Garcia Bastos;28
+;EE Indigena Prof. Luiz Gonzaga de Souza Filho;28
+;CETI José de Araújo Rodrigues;28
+;EE Presidente Eurico Gaspar Dutra;29
+;EE Francisca Mendes;29
+;EE Nossa Senhora de Fatima;29
+;EE Dom Bosco;29
+;EE Joao Conrado;29
+;EE Nossa Senhora Das Dores;29
+;EE Conrado Pinto Gomes;29
+;CETI Prof. Neuza Alves Barroso;29
+;EE Armando Mendes;30
+;EETI Benedita Barbosa de Souza;30
+;EE Presidente Castello Branco;30
+;EE Prof. Chagas Mattos;30
+;EE Armando Mendes;31
+;EE N. S. Guadalupe;31
+;EE Sao Jose;31
+;EE Waldemarina Ferreira;31
+;EE Zulmira Lima Lins;31
+;CETI Professora Naide Lins de Albuquerque;31
+;EE Jose Carlos Martins de Medeiros Raposo;32
+;EE Prof. Jose Elno Ferreira de Souza;32
+;EE Profa. Candida Souto;33
+;EE Alvaro Maia;33
+;EE Duque de Caxias;33
+;EE Oswaldo Cruz;33
+;EE Patronato Maria Auxiliadora;33
+;EE Governador Plinio Ramos Coelho;33
+;EE Indigena Kwatijariga;33
+;EE Indigena Tupajakui;33
+;CETI Tarcila Prado de Negreiros Mendes;33
+;EE Pres Castello Branco;34
+;EE Armando de Souza Mendes;34
+;EE Ipixuna;34
+;EE Isaias Vasconcelos;35
+;EE Senador Joao Bosco Ramos de Lima;35
+;EE Cecilia Carneiro de Oliveira;35
+;EE Thomas Eugene Lovejoy;35
+;CETI Maria Izabel Ferreira Xavier Desterro E Silva;35
+;EE Elias Novoa Alvarez;35
+;Anexo da EE Elias Novoa;35
+;Anexo da EE Elias Novoa;35
+;EE Coronel Cruz;36
+;EE Deputado Vital de Mendonca;36
+;EE Prof. Fernando Ellis Ribeiro;36
+;EE Jose Carlos Martins Mestrinho;36
+;EE Capitao-General Mendonca Furtado;36
+;EE Profa. Luiza de Vasconcelos Dias;36
+;EE Senador Joao Bosco Ramos de Lima;36
+;EE Sergio Mendonca de Aquino;36
+;EE Anilia Nogueira da Silva;36
+;EE Maria Ivone de Araujo Leite;36
+;EE Profa. Mirtes Rosa Mendes de Mendonca Lima;36
+;EE Dep Joao Valerio de Oliveira;36
+;EE Prof. Vicente Geraldo de Mendonca Lima;36
+;EE Prof. Ronaldo Marques da Silva;36
+;EE Profa. Berezith Nascimento da Silva;36
+;CETI Dom Jorge Edward Marskell;36
+;EE Santos Dumont;37
+;EETI Francidene Soares Barroso;37
+;EE Quito Tatikawa;38
+;EETI Tereza dos Santos;38
+;EE Prof. Mileto Batista;38
+;EE Yamamay;38
+;EE Castelo Branco;39
+;EE Raimundo Roberto;39
+;EE Duque de Caxias;39
+;EE Dorothea de Souza Braga;39
+;EE Armando Berredo;40
+;EE Prof. Romerito da Silva Brito;40
+;EE Profa. Altina Gomes de Oliveira;40
+;EE Pe Joao Van Den;41
+;EE Sao Francisco;41
+;EE Irma Bruna;41
+;EE Indigena Joaquim Romao;41
+;EETI Profª Balbina Mestrinho;42
+;Educandario Santa Rita;42
+;EE Santo Agostinho;42
+;EE Thome de Medeiros Raposo;42
+;CETI Agostinho Ernesto de Almeida;42
+;EE Carlos Pinho;43
+;EE Castello Branco;43
+;EE Eurico Gaspar Dutra;43
+;EE Januario Santana;43
+;EE Joaquim de Souza Coelho;43
+;EE Jose Kallil Assaf;43
+;EE Leopoldo Neves;43
+;EE Magnolia Ventura;43
+;EE Mario Silva Dalmeida;43
+;EE Nossa Senhora de Nazare;43
+;EE Regina Fernandes;43
+;EE Jose Mota;43
+;EE Agra Reis;43
+;EE Andre Vidal de Araujo;43
+;EE Virgilia Alexandre Maddy;43
+;EE Jose Seffair;43
+;EE Jamil Seffair;43
+;EE Nossa Senhora do Rosario;43
+;EE Prof. Gilberto Mestrinho;43
+;CETI Prefeito Washington Luis Regis Da Silva;43
+;EE Anselmo Jacob;44
+;EE Aristeu Das Neves Bicho;45
+;EE Didimo Soares;45
+;EE Nª Sª Das Gracas;45
+;EE Hermenegildo de Campos;45
+;EE Senador Joao Bosco Ramos de Lima;45
+;EE Pedro Aguirre;45
+;EE Maria Sa Mota;45
+;EE Santo Antonio do Matupy;45
+;EE Indigena Gomercindo Caetano de Oliveira;45
+;EE Indigena Sao Jose;45
+;CETI Historiador Arindal Vinicius Da Fonseca Reis;45
+;EE Joao Bosco Ramos de Lima;46
+;EE Benta Solart;46
+;EE Prefeito Cicero Lopes da Silva;46
+;EE Adelaide Cabral;47
+;EE Castelo Branco;47
+;EE Clovis Negreiros;47
+;EE Profa. Maria da Graca Nogueira;47
+;EE Miriam Sakyama;47
+;EE Profa. Santina Felizola;47
+;EE Sao Pedro;47
+;EETI Walton Rodrigues Bizantino;47
+;EETI Prefeito Donga Michiles;47
+;EE Joao Paulo II;47
+;EE Prof. Gilberto Mestrinho;48
+;EE Sao Sebastiao do Corocoro;48
+;EE Prof. Raimundo da Silva Melo;48
+;EETI Profa. Enery Barbosa dos Santos;48
+;EE Povo Indigena Hexkaryana;48
+;EE Engo Abilio Nery;49
+;EE Profa. Isabel Barroncas;49
+;EE Profa. Maria Araujo Sales;49
+;EE Prof. Jose Paula de Sa;49
+;CETI Profa. Rosaria Marinho Paes;49
+;EETI Joaquim de Paula;50
+;EETI Balbina Mestrinho;50
+;EETI Danilo de Mattos Areosa;50
+;EE Guilherme Buzaglo;51
+;EE Prof. Joaquim Canamary Gualberto;51
+;EE Francisco de Sa;51
+;EE Julieta Lopes de Albuquerque;51
+;EE J.W. Marriot Jr;51
+;EETI Lourival Holanda Saraiva Neto;51
+;Colegio Batista de Parintins;52
+;EE Araujo Filho;52
+;EETI Brandao de Amorim;52
+;EE Gentil Belem;52
+;EE Padre Jorge Freizzinni;52
+;EE Ministro Waldemar Pedrosa;52
+;Colegio Nossa Senhora do Carmo;52
+;EE Prof. Aderson de Menezes;52
+;EE Ryota Oyama;52
+;EE Sao Jose Operario;52
+;EE Senador Alvaro Maia;52
+;EE Senador Joao Bosco;52
+;EE Suzana de Jesus Azedo;52
+;EE Geny Bentes de Jesus;52
+;EE Irma Sa;52
+;EE Tomaszinho Meirelles;52
+;EE Dom Gino Malvestio;52
+;EE de Caburi;52
+;EE Caetano Mendonca;52
+;CETI Glaucio Goncalves;52
+;Centro de Ensino Mediado Por Tecnologia de Parintins;52
+;EE Alberto de A. Correa;53
+;EE Frei Mario Sabino;53
+;EE Cruzeiro do Ceu;53
+;EE Maria Calderaro;54
+;EETI Presidente Figueiredo;54
+;EE de Balbina;54
+;CETI Maria Eva Dos Santos;54
+;EE Raimundo Paz;55
+;EE Rio Preto da Eva;55
+;EE Sagrada Familia;56
+;EE Santa Isabel;56
+;EETI Padre Schanaider;56
+;EE Presidente Vargas;57
+;EE Santo Antonio;57
+;EE Deuzalina Pinto Ribeiro;57
+;EE Dom Pedro I;57
+;EE Eduardo Ribeiro;57
+;EE Rosa Garcia;57
+;EE Tenente Antonio Joao;58
+;EE Nossa Senhora da Imaculada Conceicao;58
+;EE Indigena Duque de Caxias;58
+;EE Sao Miguel;58
+;EE Dom Massa;58
+;EE Sagrado Coracao;58
+;EE Dom Bosco;58
+;EE Imaculada Conceicao;58
+;EE Nª Sª da Assuncao;58
+;EE Sao Gabriel;58
+;EE Irma Ines Penha;58
+;EE Sagrada Familia;58
+;EE Indigena Yepamahsa Imikohorimahsa;58
+;EETI Indigena Pamuri Mahsa Wi I;58
+;CETI Pedro Fukuyei Yamaguchi Ferreira;58
+;EE Monsenhor Evangelista Cefalonia;59
+;EE Desembargador Joao Rebelo Correa;59
+;EE Profa. Nilce Rocha Coelho;59
+;EE Lauro de Almeida Castelo Branco;59
+;Centro Educacional Domenico Marzi;59
+;EE Indigena Poguta;59
+;EE Indigena Genesio Custodio Manuel;59
+;CETI Calixto Ribeiro;59
+;Centro Educacional 27 de Julho;60
+;EETI Sao Sebastiao;60
+;EE Deputado Armando Mendes;60
+;EE Fernando Ramos de Miranda;60
+;EE 5 de Setembro;61
+;EE Humberto de Alencar Castelo Branco;61
+;EE Marechal Rondon;62
+;EE Almirante Tamandare;62
+;EE Conceicao Xavier de Alencar;62
+;EE Pedro Teixeira;62
+;EE Duque de Caxias;62
+;EE Belem do Solimoes;62
+;EE Prof. Raimundo da Silva Carvalho;62
+;EE Indigena Profa. Elecia Campos Manduca;62
+;CETI João Carlos Pereira dos Santos;62
+;EE Antonio Ferreira de Oliveira;63
+;EE Marcelino Champagnat;63
+;EE Marizita;63
+;EE Alcyjara de Queiroz;64
+;EE Amelia Lima;64
+;EE Antidio Borges Facanha;64
+;EE Corintho Borges Facanha;64
+;EE Eduardo Ribeiro;64
+;EE Eduardo Sa;64
+;EE Frei Andre da Costa;64
+;EE Isidoro Goncalves de Souza;64
+;EE Madre Maria Das Merces;64
+;EE Nossa Senhora Das Gracas;64
+;Centro Educacional Governador Gilberto Mestrinho;64
+;EE Sao Jose;64
+;EE Santa Thereza;64
+;EE Dep. Armando de Souza Mendes;64
+;EE Getulio Vargas;64
+;EE Profa. Nazira Litaiff Moriz;64
+;CETI Francisco Helio Bezerra Bessa;64
+;EE Sao Francisco;65
+;EE Madre Regina Protmann;65
+;EE Hermano Stradelli;66
+;EE Edson Melo;66
+;EE Profa. Cinthia Regia Gomes do Livramento;66
+;EETI Prof. Lazaro Ramos;67
+;EE Balbina Mestrinho;67
+;CETI Pedro Falabella;67
+;EE Esperanca;68
+;EE Licinio Jose de Araujo;68
+;EE Maria Arruda;68
+;EE Prof. Armando Kettle;68

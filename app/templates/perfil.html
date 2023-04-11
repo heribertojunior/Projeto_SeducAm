@@ -1,0 +1,58 @@
+<!-- formulario.html -->
+<form id="formulario">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required><br><br>
+    
+    {% if mostrar_campo_email %}
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br><br>
+    {% endif %}
+    
+    <button type="submit">Enviar</button>
+  </form>
+  
+  <script src="{% static 'js/jquery-3.6.4.min.js' %}"></script>
+  <script>
+  $(document).ready(function() {
+    $('#formulario').submit(function(event) {
+      event.preventDefault();
+      
+      var nome = $('#nome').val();
+      var email = $('#email').val();
+      
+      // Validar campos
+      if (nome == '') {
+        alert('Preencha o campo nome!');
+        return;
+      }
+      
+      // Verificar se o campo email está visível
+      if ($('#email').is(':visible')) {
+        // Validar campo email
+        if (email == '') {
+          alert('Preencha o campo email!');
+          return;
+        }
+      }
+      
+      // Enviar dados do formulário usando Ajax
+      $.ajax({
+        type: 'POST',
+        url: '{% url "submit_formulario" %}',
+        data: {
+          'nome': nome,
+          'email': email,
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+        },
+        success: function(response) {
+          alert('Formulário enviado com sucesso!');
+          $('#nome').val('');
+          $('#email').val('');
+        },
+        error: function(response) {
+          alert('Ocorreu um erro ao enviar o formulário!');
+        }
+      });
+    });
+  });
+  </script>

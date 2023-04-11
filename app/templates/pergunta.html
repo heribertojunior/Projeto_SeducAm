@@ -1,0 +1,603 @@
+{% extends 'model.html' %}
+{% load static %}
+
+{% block conteudo %}
+<center><h1>Formulário do Componente Curricular de {{materia}} </h1></center>
+<br>
+<div class="top-buffer">
+    <form action="{% url 'resposta' %}" method="post" >
+        {% csrf_token %}
+
+        <div style="display: none;">
+            <label>professor</label>
+                <select name="professor" id="id_professor">
+                    <option value="{{professor_instance.instance.id}}">{{professor_instance.instance.nome}}</option>
+                </select>
+        </div>
+
+
+
+    <div >
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <label><h5>Selecione o Bimestre:</h5></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:center">
+
+                        <table>
+                            <tr>
+                                <td>
+                                    <input type="checkbox"  id="bimestre_1_id" name="bimestre_1" value="1" style="width: 25px; height: 25px; vertical-align:center">
+                                </td>
+                                <td></td>
+                                <td>
+                                    <label for="bimestre_1" style="vertical-align: center;">1º Bimestre</label>
+                                </td>
+                            </tr>
+                        </table>
+
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:center">
+                        <table>
+                            <tr>
+                                <td>
+                                     <input type="checkbox" id="bimestre_2_id" name="bimestre_2" value="2" style="width: 25px; height: 25px;">
+                                </td>
+                                <td></td>
+                                <td>
+                                    <label for="bimestre_2" style="vertical-align: center;">2º Bimestre</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:center">
+                        <table>
+                            <tr>
+                                <td>
+                                     <input type="checkbox" id="bimestre_3_id" name="bimestre_3" value="3" style="width: 25px; height: 25px;">
+                                </td>
+                                <td></td>
+                                <td>
+                                    <label for="bimestre_3" style="vertical-align: center;">3º Bimestre</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align:center">
+                        <table>
+                            <tr>
+                                <td>
+                                     <input type="checkbox" id="bimestre_4_id" name="bimestre_4" value="4" style="width: 25px; height: 25px;">
+                                </td>
+                                <td></td>
+                                <td>
+                                    <label for="bimestre_4" style="vertical-align: center;">4º Bimestre</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+        <br>
+        <hr>
+
+        <center><h3 id="obj_id" style="display:none">Objetos do Conhecimento</h3></center>
+        <br>
+
+        <div name="bim1" id="bim1_id" style="display:none">
+            <br>
+            <center><h4>BIMESTRE 1</h4></center>
+            <br>
+            <div style="display: none;">
+                <label>professor</label>
+                <select name="bimestre1" id="id_bimestre1">
+                    <option value="{{b1_id}}">{{b1_id}}</option>
+                </select>
+            </div>
+            <div>
+                <label>Foi possível realizar a coleta?</label>
+                <select name="foi_possivelb1" id="foi_possivelb1_id" >
+                    <option value="" data-default disabled selected></option>
+                    <option value="sim"  data-default >Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <br>
+            <div id="motivob1" style="display:none">
+                <label>Se não foi possível, indique o motivo:</label>
+                <select name="motivob1" id="motivob1_id">
+                    <option value="" data-default disabled selected></option>
+                    <option value="Escola exclusivamente em atividade remota">Escola Exclusivamente em Atividade Remota</option>
+                    <option value="Escola no período de coleta sem atividade presencial">Escola no Período de Coleta sem Atividade Presencial</option>
+                    <option value="Professor ausente ou de atestado/licença">Professor Ausente ou de Atestado/Licença</option>
+                    <option value="Professor afastado">Professor Afastado</option>
+                    <option value="Professor se recusou a participar da entrevista">Professor se Recusou a Participar da Entrevista</option>
+                    <option value="Outros">Não se Aplica</option>
+                </select>
+            </div>
+            <br>
+            <div id="outrosb1" style="display:none">
+                <label>Informe o motivo:</label>
+                <input type="text" id="id_outrosb1" name="outrob1">
+            </div>
+
+            <hr>
+
+            <table name="bim1t" id="bim1t_id" style="display:none">
+             {% for pergunta  in perguntas_b1 %}
+                <tr>
+                    <td><input type="checkbox" id="p{{pergunta.id}}_id" name="p{{pergunta.id}}" style="width: 25px; height: 25px;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                <td height="100" align='justify'><label for="p{{pergunta.id}}">{{pergunta.pergunta}}</label></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+            <hr>
+        </div>
+
+
+
+
+        <div name="bim2" id="bim2_id" style="display:none">
+            <br>
+            <center><h4>BIMESTRE 2</h4></center>
+            <br>
+
+            <div style="display: none;">
+                <label>professor</label>
+                <select name="bimestre2" id="id_bimestre2">
+                    <option value="{{b2_id}}">{{b2_id}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Foi possível realizar a coleta?</label>
+                <select name="foi_possivelb2" id="foi_possivelb2_id"     >
+                    <option value="" data-default disabled selected></option>
+                    <option value="sim"  data-default >Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <br>
+            <div id="motivob2" style="display:none">
+                <label>Se não foi possível, indique o motivo:</label>
+                <select name="motivob2" id="motivob2_id">
+                    <option value="" data-default disabled selected></option>
+                    <option value="Escola exclusivamente em atividade remota">Escola Exclusivamente em Atividade Remota</option>
+                    <option value="Escola no período de coleta sem atividade presencial">Escola no Período de Coleta sem Atividade Presencial</option>
+                    <option value="Professor ausente ou de atestado/licença">Professor Ausente ou de Atestado/Licença</option>
+                    <option value="Professor afastado">Professor Afastado</option>
+                    <option value="Professor se recusou a participar da entrevista">Professor se Recusou a Participar da Entrevista</option>
+                    <option value="Outros">Não se Aplica</option>
+                </select>
+            </div>
+            <br>
+            <div id="outrosb2" style="display:none">
+                <label>Informe o motivo:</label>
+                <input type="text" id="id_outrosb2" name="outrob2">
+            </div>
+            <hr>
+
+            <table name="bim2t" id="bim2t_id" style="display:none">
+             {% for pergunta  in perguntas_b2 %}
+                <tr>
+                    <td><input type="checkbox" id="p{{pergunta.id}}_id" name="p{{pergunta.id}}" style="width: 25px; height: 25px;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                <td height="100" align='justify'><label for="p{{pergunta.id}}">{{pergunta.pergunta}}</label></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+            <hr>
+        </div>
+
+
+
+        <div name="bim3" id="bim3_id" style="display:none">
+            <br>
+            <center><h4>BIMESTRE 3</h4></center>
+            <br>
+
+            <div style="display: none;">
+                <label>professor</label>
+                <select name="bimestre3" id="id_bimestre3">
+                    <option value="{{b3_id}}">{{b3_id}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Foi possível realizar a coleta?</label>
+                <select name="foi_possivelb3" id="foi_possivelb3_id"     >
+                    <option value="" data-default disabled selected></option>
+                    <option value="sim"  data-default >Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <br>
+            <div id="motivob3" style="display:none">
+                <label>Se não foi possível, indique o motivo:</label>
+                <select name="motivob3" id="motivob3_id">
+                    <option value="" data-default disabled selected></option>
+                    <option value="Escola exclusivamente em atividade remota">Escola Exclusivamente em Atividade Remota</option>
+                    <option value="Escola no período de coleta sem atividade presencial">Escola no Período de Coleta sem Atividade Presencial</option>
+                    <option value="Professor ausente ou de atestado/licença">Professor Ausente ou de Atestado/Licença</option>
+                    <option value="Professor afastado">Professor Afastado</option>
+                    <option value="Professor se recusou a participar da entrevista">Professor se Recusou a Participar da Entrevista</option>
+                    <option value="Outros">Não se Aplica</option>
+                </select>
+            </div>
+            <br>
+            <div id="outrosb3" style="display:none">
+                <label>Informe o motivo:</label>
+                <input type="text" id="id_outrosb3" name="outrob3">
+            </div>
+            <hr>
+
+            <table name="bim3t" id="bim3t_id" style="display:none">
+             {% for pergunta  in perguntas_b3 %}
+                <tr>
+                    <td><input type="checkbox" id="p{{pergunta.id}}_id" name="p{{pergunta.id}}" style="width: 25px; height: 25px;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                <td height="100" align='justify'><label for="p{{pergunta.id}}">{{pergunta.pergunta}}</label></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+            <hr>
+        </div>
+
+
+
+        <div name="bim4" id="bim4_id" style="display:none">
+            <br>
+            <center><h4>BIMESTRE 4</h4></center>
+            <br>
+
+            <div style="display: none;">
+                <label>professor</label>
+                <select name="bimestre4" id="id_bimestre4">
+                    <option value="{{b4_id}}">{{b4_id}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Foi possível realizar a coleta?</label>
+                <select name="foi_possivelb4" id="foi_possivelb4_id"     >
+                    <option value="" data-default disabled selected></option>
+                    <option value="sim"  data-default >Sim</option>
+                    <option value="nao">Não</option>
+                </select>
+            </div>
+            <br>
+            <div id="motivob4" style="display:none">
+                <label>Se não foi possível, indique o motivo:</label>
+                <select name="motivob4" id="motivob4_id">
+                    <option value="" data-default disabled selected></option>
+                    <option value="Escola exclusivamente em atividade remota">Escola Exclusivamente em Atividade Remota</option>
+                    <option value="Escola no período de coleta sem atividade presencial">Escola no Período de Coleta sem Atividade Presencial</option>
+                    <option value="Professor ausente ou de atestado/licença">Professor Ausente ou de Atestado/Licença</option>
+                    <option value="Professor afastado">Professor Afastado</option>
+                    <option value="Professor se recusou a participar da entrevista">Professor se Recusou a Participar da Entrevista</option>
+                    <option value="Outros">Não se Aplica</option>
+                </select>
+            </div>
+            <br>
+            <div id="outrosb4" style="display:none">
+                <label>Informe o motivo:</label>
+                <input type="text" id="id_outrosb4" name="outrob4">
+            </div>
+            <hr>
+
+            <table name="bim4t" id="bim4t_id" style="display:none">
+             {% for pergunta  in perguntas_b4 %}
+                <tr>
+                    <td><input type="checkbox" id="p{{pergunta.id}}_id" name="p{{pergunta.id}}" style="width: 25px; height: 25px;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                <td height="100" align='justify'><label for="p{{pergunta.id}}">{{pergunta.pergunta}}</label></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+            <hr>
+        </div>
+
+    </div>
+        <div class="row">
+            <button class='btn btn-success' type="submit" style="margin-right: 5px;margin-left:5px; margin-bottom:5px">Salvar</button>
+            <a class="btn btn-danger" style="margin-bottom:5px;"  href="{% url 'cancel' %}">Cancelar</a>
+        </div>
+     </form>
+     <script>
+         let coleta_fieldb1 = document.getElementById("foi_possivelb1_id")
+         coleta_fieldb1.addEventListener("change", showMotivob1)
+
+        function showMotivob1(e){
+            let motivo_fieldb1 = document.getElementById("motivob1")
+            if(e.target.value == "nao"){
+                motivo_fieldb1.style.display = "block"
+                let obj_field = document.getElementById("obj_id")
+                if(bimestre2_field.checked || bimestre3_field.checked || bimestre4_field.checked){
+                    obj_field.style.display = "block"
+                }else{
+                    obj_field.style.display = "none"
+                }
+                let bim1t = document.getElementById("bim1t_id")
+
+                bim1t.style.display = "none"
+            }else{
+                motivo_fieldb1.style.display = "none"
+                let bim1t = document.getElementById("bim1t_id")
+
+                bim1t.style.display = "block"
+
+            }
+        }
+
+
+
+        let coleta_fieldb2 = document.getElementById("foi_possivelb2_id")
+         coleta_fieldb2.addEventListener("change", showMotivob2)
+
+        function showMotivob2(e){
+            let motivo_fieldb2 = document.getElementById("motivob2")
+            if(e.target.value == "nao"){
+                motivo_fieldb2.style.display = "block"
+                let obj_field = document.getElementById("obj_id")
+                if(bimestre2_field.checked || bimestre3_field.checked || bimestre4_field.checked){
+                    obj_field.style.display = "block"
+                }else{
+                    obj_field.style.display = "none"
+                }
+                let bim2t = document.getElementById("bim2t_id")
+
+                bim2t.style.display = "none"
+            }else{
+                motivo_fieldb2.style.display = "none"
+                let bim2t = document.getElementById("bim2t_id")
+
+                bim2t.style.display = "block"
+
+            }
+        }
+
+
+        let coleta_fieldb3 = document.getElementById("foi_possivelb3_id")
+         coleta_fieldb3.addEventListener("change", showMotivob3)
+
+        function showMotivob3(e){
+            let motivo_fieldb3 = document.getElementById("motivob3")
+            if(e.target.value == "nao"){
+                motivo_fieldb3.style.display = "block"
+                let obj_field = document.getElementById("obj_id")
+                if(bimestre2_field.checked || bimestre3_field.checked || bimestre4_field.checked){
+                    obj_field.style.display = "block"
+                }else{
+                    obj_field.style.display = "none"
+                }
+                let bim3t = document.getElementById("bim3t_id")
+
+                bim3t.style.display = "none"
+            }else{
+                motivo_fieldb3.style.display = "none"
+                let bim3t = document.getElementById("bim3t_id")
+
+                bim3t.style.display = "block"
+
+            }
+        }
+
+
+        let coleta_fieldb4 = document.getElementById("foi_possivelb4_id")
+         coleta_fieldb4.addEventListener("change", showMotivob4)
+
+        function showMotivob4(e){
+            let motivo_fieldb4 = document.getElementById("motivob4")
+            if(e.target.value == "nao"){
+                motivo_fieldb4.style.display = "block"
+                let obj_field = document.getElementById("obj_id")
+                if(bimestre2_field.checked || bimestre3_field.checked || bimestre4_field.checked){
+                    obj_field.style.display = "block"
+                }else{
+                    obj_field.style.display = "none"
+                }
+                let bim4t = document.getElementById("bim4t_id")
+
+                bim4t.style.display = "none"
+            }else{
+                motivo_fieldb4.style.display = "none"
+                let bim4t = document.getElementById("bim4t_id")
+
+                bim4t.style.display = "block"
+
+            }
+        }
+
+
+        let motivo_fieldb1 = document.getElementById("motivob1_id")
+        motivo_fieldb1.addEventListener("change", showOutrosb1)
+
+        function showOutrosb1(e){
+            let outros_fieldb1 = document.getElementById("outrosb1")
+            if(e.target.value == "Outros"){
+                outros_fieldb1.style.display = "block"
+            }else{
+                outros_fieldb1.style.display = "none"
+            }
+        }
+
+
+        let motivo_fieldb2 = document.getElementById("motivob2_id")
+        motivo_fieldb2.addEventListener("change", showOutrosb2)
+
+        function showOutrosb2(e){
+            let outros_fieldb2 = document.getElementById("outrosb2")
+            if(e.target.value == "Outros"){
+                outros_fieldb2.style.display = "block"
+            }else{
+                outros_fieldb2.style.display = "none"
+            }
+        }
+
+
+
+        let motivo_fieldb3 = document.getElementById("motivob3_id")
+        motivo_fieldb3.addEventListener("change", showOutrosb3)
+
+        function showOutrosb3(e){
+            let outros_fieldb3 = document.getElementById("outrosb3")
+            if(e.target.value == "Outros"){
+                outros_fieldb3.style.display = "block"
+            }else{
+                outros_fieldb3.style.display = "none"
+            }
+        }
+
+
+
+        let motivo_fieldb4 = document.getElementById("motivob4_id")
+        motivo_fieldb4.addEventListener("change", showOutrosb4)
+
+        function showOutrosb4(e){
+            let outros_fieldb4 = document.getElementById("outrosb4")
+            if(e.target.value == "Outros"){
+                outros_fieldb4.style.display = "block"
+            }else{
+                outros_fieldb4.style.display = "none"
+            }
+        }
+
+        let bimestre1_field = document.getElementById("bimestre_1_id")
+        bimestre1_field.addEventListener("change", showBimestre1)
+
+        function showBimestre1(e){
+            if(this.checked){
+                let bim1 = document.getElementById("bim1_id")
+                let obj_field = document.getElementById("obj_id")
+                 coleta_fieldb1.setAttribute("required", "required")
+                 bim1.style.display = "block"
+                 obj_field.style.display = "block"
+
+            }else{
+                let bim1 = document.getElementById("bim1_id")
+                let obj_field = document.getElementById("obj_id")
+                if(bimestre2_field.checked || bimestre3_field.checked || bimestre4_field.checked){
+                    obj_field.style.display = "block"
+                }else{
+                    obj_field.style.display = "none"
+                }
+                 bim1.style.display = "none"
+                 coleta_fieldb1.removeAttribute("required")
+
+            }
+
+
+        }
+
+        let bimestre2_field = document.getElementById("bimestre_2_id")
+        bimestre2_field.addEventListener("change", showBimestre2)
+
+        function showBimestre2(e){
+            if(this.checked){
+                let bim2 = document.getElementById("bim2_id")
+                let obj_field = document.getElementById("obj_id")
+                 coleta_fieldb2.setAttribute("required", "required")
+                 bim2.style.display = "block"
+                 obj_field.style.display = "block"
+            }else{
+                let bim2 = document.getElementById("bim2_id")
+                let obj_field = document.getElementById("obj_id")
+                if(bimestre1_field.checked || bimestre3_field.checked || bimestre4_field.checked){
+                    obj_field.style.display = "block"
+                }else{
+                    obj_field.style.display = "none"
+                }
+                 bim2.style.display = "none"
+                 coleta_fieldb2.removeAttribute("required")
+            }
+
+
+        }
+
+        let bimestre3_field = document.getElementById("bimestre_3_id")
+        bimestre3_field.addEventListener("change", showBimestre3)
+
+        function showBimestre3(e){
+            if(this.checked){
+                let bim3 = document.getElementById("bim3_id")
+                let obj_field = document.getElementById("obj_id")
+                 coleta_fieldb3.setAttribute("required", "required")
+                 bim3.style.display = "block"
+                 obj_field.style.display = "block"
+            }else{
+                let bim3 = document.getElementById("bim3_id")
+                let obj_field = document.getElementById("obj_id")
+                if(bimestre2_field.checked || bimestre1_field.checked || bimestre4_field.checked){
+                    obj_field.style.display = "block"
+                }else{
+                    obj_field.style.display = "none"
+                }
+                 bim3.style.display = "none"
+                 coleta_fieldb3.removeAttribute("required")
+            }
+
+
+        }
+
+        let bimestre4_field = document.getElementById("bimestre_4_id")
+        bimestre4_field.addEventListener("change", showBimestre4)
+
+        function showBimestre4(e){
+            if(this.checked){
+                let bim4 = document.getElementById("bim4_id")
+                let obj_field = document.getElementById("obj_id")
+                 coleta_fieldb4.setAttribute("required", "required")
+                 bim4.style.display = "block"
+                 obj_field.style.display = "block"
+            }else{
+                let bim4 = document.getElementById("bim4_id")
+                let obj_field = document.getElementById("obj_id")
+                if(bimestre2_field.checked || bimestre3_field.checked || bimestre1_field.checked){
+                    obj_field.style.display = "block"
+                }else{
+                    obj_field.style.display = "none"
+                }
+                 bim4.style.display = "none"
+                 coleta_fieldb4.removeAttribute("required")
+            }
+
+
+        }
+
+     </script>
+
+
+    </div>
+
+{% endblock conteudo %}
+
+{% block scripts %}
+{% endblock scripts %}

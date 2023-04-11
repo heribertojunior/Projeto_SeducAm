@@ -1,0 +1,255 @@
+{% extends 'model.html' %}
+{% load static %}
+
+{% block conteudo %}
+<center><h1>Formulário de Acompanhamento do Cumprimento do Currículos</h1></center>
+<br>
+<div class="top-buffer">
+    <form action="{% url 'form' %}" method="post">
+     {% csrf_token %}
+     {{ form_professor.as_p }}
+     </div>
+
+     <div class="row">
+         <button class='btn btn-success' type="submit" style="margin-right: 5px;margin-left:5px;margin-bottom:5px">Salvar</button>
+
+         <a class="btn btn-danger" style="margin-bottom:5px;" href="{% url 'cancel' %}">Cancelar</a>
+     </div>
+     </form>
+     <script>
+        //ajax
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        //jurisdição
+        let jurisdicao_field = document.getElementById("id_jurisdicao")
+        jurisdicao_field.addEventListener("change", getJurisdicaoId)
+
+        function getJurisdicaoId(e){
+            console.log(e.target.value)
+            let jurisdicao_id = e.target.value
+
+            const data = { id: jurisdicao_id };
+            let url = "{% url 'coordenadorias' %}"
+
+        fetch(url, {
+        method: "POST", // or 'PUT'
+        headers: {
+            "Content-Type": "application/json",
+            'X-CSRFToken': csrftoken
+        },
+        body: JSON.stringify(data),
+        })
+        .then((response) => response.json())
+
+        .then((data) => {
+            console.log("Success:", data);
+            coordenadoria_field.innerHTML = '<option value="" selected="">---------</option>'
+            for(let i = 0; i < data.length; i++){
+                coordenadoria_field.innerHTML += '<option value="' + data[i].id + '">' + data[i].coordenadoria + '</option>'
+            }
+        })
+
+        .catch((error) => {
+        console.error("Error:", error);
+        });
+
+
+        }
+
+        //coordenadoria
+        let coordenadoria_field = document.getElementById("id_coordenadoria")
+        coordenadoria_field.addEventListener("change", getCoordenadoriaId)
+
+        function getCoordenadoriaId(e){
+            console.log(e.target.value)
+            let coordenadoria_id = e.target.value
+
+            const data = { id: coordenadoria_id };
+            let url = "{% url 'escolas' %}"
+
+            fetch(url, {
+                method: "POST", // or 'PUT'
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+
+            .then((data) => {
+                console.log("Success:", data);
+                escola_field.innerHTML = '<option value="" selected="">---------</option>'
+                for(let i = 0; i < data.length; i++){
+                    escola_field.innerHTML += '<option value="' + data[i].id + '">' + data[i].escola + '</option>'
+                }
+            })
+
+            .catch((error) => {
+                console.error("Error:", error);
+             });
+        }
+
+        //escola
+        let escola_field = document.getElementById("id_escola")
+        escola_field.addEventListener("change", getEscolaId)
+
+        function getEscolaId(e){
+            console.log(e.target.value)
+            let escola_id = e.target.value
+
+            const data = { id: escola_id };
+            let url = "{% url 'turnos' %}"
+
+            fetch(url, {
+                method: "POST", // or 'PUT'
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+
+            .then((data) => {
+                console.log("Success:", data);
+                turno_field.innerHTML = '<option value="" selected="">---------</option>'
+                for(let i = 0; i < data.length; i++){
+                    turno_field.innerHTML += '<option value="' + data[i].id + '">' + data[i].turno + '</option>'
+                }
+            })
+
+            .catch((error) => {
+                console.error("Error:", error);
+             });
+
+        }
+
+        //turno
+        let turno_field = document.getElementById("id_turno")
+        turno_field.addEventListener("change", getTurnoId)
+
+        function getTurnoId(e){
+            console.log(e.target.value)
+            let turno_id = e.target.value
+
+            const data = { id: turno_id };
+            let url = "{% url 'series' %}"
+
+            fetch(url, {
+                method: "POST", // or 'PUT'
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+
+            .then((data) => {
+                console.log("Success:", data);
+                serie_field.innerHTML = '<option value="" selected="">---------</option>'
+                for(let i = 0; i < data.length; i++){
+                    serie_field.innerHTML += '<option value="' + data[i].id + '">' + data[i].serie + '</option>'
+                }
+            })
+
+            .catch((error) => {
+                console.error("Error:", error);
+             });
+
+        }
+
+        //serie
+        let serie_field = document.getElementById("id_serie")
+        serie_field.addEventListener("change", getSerieId)
+
+        function getSerieId(e){
+            console.log(e.target.value)
+            let serie_id = e.target.value
+
+            const data = { id: serie_id };
+            let url = "{% url 'turmas' %}"
+
+            fetch(url, {
+                method: "POST", // or 'PUT'
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+
+            .then((data) => {
+                console.log("Success:", data);
+                turma_field.innerHTML = '<option value="" selected="">---------</option>'
+                for(let i = 0; i < data.length; i++){
+                    turma_field.innerHTML += '<option value="' + data[i].id + '">' + data[i].turma + '</option>'
+                }
+            })
+
+            .catch((error) => {
+                console.error("Error:", error);
+             });
+
+        }
+
+        //turma
+        let turma_field = document.getElementById("id_turma")
+        let materia_field = document.getElementById("id_materia")
+        serie_field.addEventListener("change", getTurmaId)
+
+        function getTurmaId(e){
+            console.log(e.target.value)
+            let turma_id = e.target.value
+
+            const data = { id: turma_id };
+            let url = "{% url 'materias' %}"
+
+            fetch(url, {
+                method: "POST", // or 'PUT'
+                headers: {
+                    "Content-Type": "application/json",
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+
+            .then((data) => {
+                console.log("Success:", data);
+                materia_field.innerHTML = '<option value="" selected="">---------</option>'
+                for(let i = 0; i < data.length; i++){
+                    materia_field.innerHTML += '<option value="' + data[i].id + '">' + data[i].materia + '</option>'
+                }
+            })
+
+            .catch((error) => {
+                console.error("Error:", error);
+             });
+
+        }
+
+     </script>
+    </div>
+
+{% endblock conteudo %}
+
+{% block scripts %}
+{% endblock scripts %}
