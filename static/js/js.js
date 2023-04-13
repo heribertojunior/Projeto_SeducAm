@@ -13,6 +13,7 @@ function gera_cor(qtd=1){
 
 }
 
+/*
 function renderiza_cumprimento(url){
   fetch(url, {
         method: 'get',
@@ -21,7 +22,7 @@ function renderiza_cumprimento(url){
     }).then(function(data){
 
       const ctx = document.getElementById('cumprimento_curriculo').getContext('2d');
-      var cores_cumprimento = gera_cor(2);
+      var cores_cumprimento = gera_cor(9);
       const myChart = new Chart(ctx, {
         type: 'pie',
         data:{
@@ -29,8 +30,8 @@ function renderiza_cumprimento(url){
           datasets: [{
             label: 'Cumprimento',
             data:[data.totalV, data.totalF],
-            backgroundColor: cores_cumprimento[0],
-            border_color: cores_cumprimento[9],
+            backgroundColor: [cores_cumprimento[1], cores_cumprimento[2]],
+            border_color: cores_cumprimento[3],
             borderWidth: 1
           }],
         },
@@ -38,3 +39,6 @@ function renderiza_cumprimento(url){
 
     });
 }
+*/
+
+

@@ -16,37 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `auth_user`
+-- Table structure for table `django_content_type`
 --
 
-DROP TABLE IF EXISTS `auth_user`;
+DROP TABLE IF EXISTS `django_content_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `auth_user` (
+CREATE TABLE `django_content_type` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `password` varchar(128) NOT NULL,
-  `last_login` datetime(6) DEFAULT NULL,
-  `is_superuser` tinyint(1) NOT NULL,
-  `username` varchar(150) NOT NULL,
-  `first_name` varchar(150) NOT NULL,
-  `last_name` varchar(150) NOT NULL,
-  `email` varchar(254) NOT NULL,
-  `is_staff` tinyint(1) NOT NULL,
-  `is_active` tinyint(1) NOT NULL,
-  `date_joined` datetime(6) NOT NULL,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `auth_user`
+-- Dumping data for table `django_content_type`
 --
 
-LOCK TABLES `auth_user` WRITE;
-/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
-INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$390000$U1TfzHPJR7Wt0RNwjMN3Bl$Mf6OZfxx4yY4lFdpgDi4pcYtXqZij9QrRkKruS6XbjY=',NULL,1,'admin','','','',1,1,'2023-04-05 16:22:32.243538');
-/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(20,'app','bimestre'),(7,'app','bimestref'),(8,'app','coordenadoria'),(9,'app','escola'),(10,'app','jurisdicao'),(11,'app','materia'),(19,'app','materiaf'),(12,'app','pergunta'),(13,'app','professor'),(18,'app','resposta'),(14,'app','serie'),(15,'app','serief'),(17,'app','turma'),(16,'app','turno'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(6,'sessions','session');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-05 14:33:38
+-- Dump completed on 2023-04-13 16:04:07

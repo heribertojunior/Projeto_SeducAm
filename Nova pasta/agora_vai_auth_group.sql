@@ -16,30 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `app_materiaf`
+-- Table structure for table `auth_group`
 --
 
-DROP TABLE IF EXISTS `app_materiaf`;
+DROP TABLE IF EXISTS `auth_group`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `app_materiaf` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `materia` varchar(25) NOT NULL,
-  `serief_id` bigint NOT NULL,
+CREATE TABLE `auth_group` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `app_materiaf_serief_id_dc3e4632_fk_app_serief_id` (`serief_id`),
-  CONSTRAINT `app_materiaf_serief_id_dc3e4632_fk_app_serief_id` FOREIGN KEY (`serief_id`) REFERENCES `app_serief` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `app_materiaf`
+-- Dumping data for table `auth_group`
 --
 
-LOCK TABLES `app_materiaf` WRITE;
-/*!40000 ALTER TABLE `app_materiaf` DISABLE KEYS */;
-INSERT INTO `app_materiaf` VALUES (1,'Matemática',1),(2,'Português',1),(3,'Matemática',2),(4,'Português',2),(5,'Matemática',3),(6,'Português',3),(7,'Matemática',4),(8,'Português',4);
-/*!40000 ALTER TABLE `app_materiaf` ENABLE KEYS */;
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-05 14:33:39
+-- Dump completed on 2023-04-13 16:04:06

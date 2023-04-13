@@ -16,36 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `app_resposta`
+-- Table structure for table `app_serief`
 --
 
-DROP TABLE IF EXISTS `app_resposta`;
+DROP TABLE IF EXISTS `app_serief`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `app_resposta` (
+CREATE TABLE `app_serief` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `resposta` tinyint(1) NOT NULL,
-  `foi_possivel` tinyint(1) NOT NULL,
-  `motivo` varchar(100) DEFAULT NULL,
-  `outros` varchar(150) DEFAULT NULL,
-  `created_at` datetime(6) NOT NULL,
-  `pergunta_id` bigint NOT NULL,
-  `professor_id` bigint NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `app_resposta_pergunta_id_8a2e3b0a_fk_app_pergunta_id` (`pergunta_id`),
-  KEY `app_resposta_professor_id_03f92601_fk_app_professor_id` (`professor_id`),
-  CONSTRAINT `app_resposta_pergunta_id_8a2e3b0a_fk_app_pergunta_id` FOREIGN KEY (`pergunta_id`) REFERENCES `app_pergunta` (`id`),
-  CONSTRAINT `app_resposta_professor_id_03f92601_fk_app_professor_id` FOREIGN KEY (`professor_id`) REFERENCES `app_professor` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `serie` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `app_resposta`
+-- Dumping data for table `app_serief`
 --
 
-LOCK TABLES `app_resposta` WRITE;
-/*!40000 ALTER TABLE `app_resposta` DISABLE KEYS */;
-/*!40000 ALTER TABLE `app_resposta` ENABLE KEYS */;
+LOCK TABLES `app_serief` WRITE;
+/*!40000 ALTER TABLE `app_serief` DISABLE KEYS */;
+INSERT INTO `app_serief` VALUES (1,'2 º  Ano EF'),(2,'5 º  Ano EF'),(3,'9 º  Ano EF'),(4,'3 ª  Série EM');
+/*!40000 ALTER TABLE `app_serief` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-05 14:33:40
+-- Dump completed on 2023-04-13 16:04:07

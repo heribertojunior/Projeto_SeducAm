@@ -17,7 +17,7 @@ urlpatterns = [
     path('turmas', views.getTurmas, name = "turmas"),
     path('materias', views.getMaterias, name = "materias"),
     path('dashboard', views.dashboard, name = "dashboard"),
-    path('cumprimento', views.getCumprimento, name = "cumprimento")
+    path('cumprimento', views.getCumprimento, name = "cumprimento"),
 
   #  path('resultado/', views.lista, name='resultado')
 

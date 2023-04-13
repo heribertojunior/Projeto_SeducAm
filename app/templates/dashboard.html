@@ -6,12 +6,46 @@
 
 
 <div class="container">
-    <table>
-      <td>
-        <tr><h4>Cumprimento do curriculo</h4></tr>
-        <tr><canvas id="cumprimento_curriculo" width="250" height="200"></canvas></tr>
-      </td>
-    </table>
+<center>
+  <div class="row justify-content-md-center" style="margin-bottom: 5vh;">
+    <div class="col" style="position: relative;  height: 30vh; width: 100vw; margin-bottom: 5vh;">
+      <h5>Cumprimento do curriculo</h5>
+      <canvas id="cumprimento_curriculo" ></canvas>
+    </div>
+    <div class="col" style="position: relative; height: 30vh; width: 100vw; margin-bottom: 5vh;">
+      <h5>Relação Respostas Capital-Interior</h5>
+      <canvas id="cumprimento_curriculo_jurisdicao" ></canvas>
+    </div>
+    <div class="col" style="position: relative; height: 35vh; width: 85vw;">
+      <h5 style="margin-bottom: 5vh;">Cumprimento do curriculo por Jurisdição</h5>
+      <canvas id="cumprimento_curriculo_jurisdicao_geral" ></canvas>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 5vh;">
+    <div class="col" style="position: relative; height: 35vh; width: 85vw;">
+      <h5 style="margin-bottom: 5vh;">Cumprimento do curriculo por Bimestre</h5>
+      <canvas id="cumprimento_curriculo_bimestre" ></canvas>
+    </div>
+    <div class="col" style="position: relative;  height: 35vh; width: 85vw; margin-bottom: 5vh;">
+      <h5 style="margin-bottom: 5vh;">Cumprimento do curriculo por Serie/Bimestre</h5>
+      <canvas id="cumprimento_curriculo_serie_bimestre" ></canvas>
+    </div>
+    </div>
+  <div class="row" style="margin-bottom: 5vh;">
+    <div class="col" style="position: relative;  height: 35vh; width: 85vw; ">
+      <h5 style="margin-bottom: 8vh;">Cumprimento do curriculo por Serie</h5>
+      <canvas id="cumprimento_curriculo_serie" ></canvas>
+    </div>
+    <div class="col" style="position: relative; height: 35vh; width: 85vw;">
+      <h5 style="margin-bottom: 5vh;">Cumprimento do curriculo por Disciplina</h5>
+      <canvas id="cumprimento_curriculo_disciplina" ></canvas>
+    </div>
+    <div class="col" style="position: relative; height: 35vh; width: 85vw;">
+      <h5 style="margin-bottom: 5vh;">Cumprimento do curriculo por Nível de Ensino</h5>
+      <canvas id="cumprimento_curriculo_ensino" ></canvas>
+    </div>
+  </div>
+</center>
 </div>
 
 
@@ -19,11 +53,365 @@
 
 {% endblock conteudo %}
 {% block scripts %}
-<script src="{% static 'js/js.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+
+  function renderiza_cumprimento(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+    const ctx = document.getElementById('cumprimento_curriculo').getContext('2d');
+
+    let dados = {
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: [data.totalV, data.totalF],
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor: ['rgb(32, 47, 88)' ,'rgb(223, 23, 65)']
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+       labels: ['Cumpridos', 'Não Cumpridos']
+     };
+
+     let meuDonutChart = new Chart(ctx, {
+        type: 'pie',
+        data: dados
+      });
+
+    });
+  }
+
+  function renderiza_cumprimento_series(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+      const ctx = document.getElementById('cumprimento_curriculo_serie').getContext('2d');
+
+    let dados = {
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: [data.total_serie_2, data.total_serie_5,data.total_serie_9,data.total_serie_3],
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor: ['rgb(165, 215, 232)' ,'rgb(87, 108, 188)','rgb(25, 55, 109)' ,'rgb(32, 47, 88)']
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+       labels: ['2 º  Ano EF', '5 º  Ano EF','9 º  Ano EF','3 ª Série EM']
+     };
+
+
+      let options = {
+          scales: {
+            y: {
+              min:0,
+              max:100
+            }
+          },
+          plugins:{
+            legend:{
+              display: false
+            }
+          }
+
+      }
+
+
+     let meuBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: dados,
+        options: options
+      });
+
+  });
+}
+
+
+
+
+function renderiza_cumprimento_bimestres(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+      const ctx = document.getElementById('cumprimento_curriculo_bimestre').getContext('2d');
+
+    let dados = {
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: [data.total_b1, data.total_b2,data.total_b3,data.total_b4],
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor: ['rgb(165, 215, 232)' ,'rgb(87, 108, 188)','rgb(25, 55, 109)' ,'rgb(32, 47, 88)']
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+       labels: ['1º Bimestre', '2º Bimestre','3º Bimestre','4º Bimestre']
+     };
+
+
+      let options = {
+          scales: {
+            y: {
+              min:0,
+              max:100
+            }
+          },
+          plugins:{
+            legend:{
+              display: false
+            }
+          }
+
+      }
+
+
+     let meuBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: dados,
+        options: options
+      });
+
+  });
+}
+
+
+
+function renderiza_cumprimento_bimestres_series(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+      const ctx = document.getElementById('cumprimento_curriculo_serie_bimestre').getContext('2d');
+    let labels_series = ['2 º  Ano EF', '5 º  Ano EF','9 º  Ano EF','3 ª  Série EM']
+
+    let dados = {
+      labels: labels_series,
+      datasets:[{
+        label:'1º Bimestre',
+        data: [data.por_2_b1,data.por_5_b1,data.por_9_b1,data.por_3_b1],
+        backgroundColor: ['rgb(165, 215, 232)']
+      },
+      {
+        label:'2º Bimestre',
+        data: [data.por_2_b2,data.por_5_b2,data.por_9_b2,data.por_3_b2],
+        backgroundColor: ['rgb(87, 108, 188)']
+      },
+      {
+        label:'3º Bimestre',
+        data: [data.por_2_b3,data.por_5_b3,data.por_9_b3,data.por_3_b3],
+        backgroundColor: ['rgb(25, 55, 109)']
+      },
+      {
+        label:'4º Bimestre',
+        data: [data.por_2_b4,data.por_5_b4,data.por_9_b4,data.por_3_b4],
+        backgroundColor: ['rgb(32, 47, 88)']
+      },
+      ]
+    };
+
+      let options = {
+          scales: {
+            y: {
+              min:0,
+              max:100
+            }
+          },
+
+
+      }
+
+
+     let meuBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: dados,
+        options: options
+      });
+
+  });
+}
+
+function renderiza_cumprimento_curriculo_jurisdicao(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+    const ctx = document.getElementById('cumprimento_curriculo_jurisdicao').getContext('2d');
+
+    let dados = {
+
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: [data.por_juris_cap, data.por_juris_int],
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor: ['rgb(32, 47, 88)','rgb(165, 215, 232)']
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+       labels: ['Capital', 'Interior']
+     };
+
+     let meuDonutChart = new Chart(ctx, {
+        type: 'pie',
+        data: dados
+      });
+
+    });
+  }
+
+  function renderiza_cumprimento_curriculo_jurisdicao_geral(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+      const ctx = document.getElementById('cumprimento_curriculo_jurisdicao_geral').getContext('2d');
+
+    let dados = {
+    labels: ['Capital', 'Interior'],
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: [data.por_int, data.por_cap],
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor: ['rgb(32, 47, 88)','rgb(165, 215, 232)'],
+
+
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+
+     };
+
+
+      let options = {
+          scales: {
+            y: {
+              min:0,
+              max:100
+            }
+          },
+          plugins:{
+            legend:{
+              display: false
+            }
+          }
+      }
+
+
+     let meuBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: dados,
+        options: options
+      });
+
+  });
+}
+
+function renderiza_cumprimento_curriculo_disciplina(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+      const ctx = document.getElementById('cumprimento_curriculo_disciplina').getContext('2d');
+
+    let dados = {
+    labels: ['Matemática', 'Português'],
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: [data.por_mt, data.por_pt],
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor: ['rgb(32, 47, 88)','rgb(165, 215, 232)'],
+
+
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+
+     };
+
+
+      let options = {
+          scales: {
+            y: {
+              min:0,
+              max:100
+            }
+          },
+          plugins:{
+            legend:{
+              display: false
+            }
+          }
+      }
+
+
+     let meuBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: dados,
+        options: options
+      });
+
+  });
+}
+
+
+function renderiza_cumprimento_curriculo_ensino(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+      const ctx = document.getElementById('cumprimento_curriculo_ensino').getContext('2d');
+
+    let dados = {
+    labels: ['Ensino Fundamental', 'Ensino Médio'],
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: [data.por_cumprimento_ef, data.por_cumprimento_em],
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor: ['rgb(32, 47, 88)','rgb(165, 215, 232)'],
+
+
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+
+     };
+
+
+      let options = {
+          scales: {
+            y: {
+              min:0,
+              max:100
+            }
+          },
+          plugins:{
+            legend:{
+              display: false
+            }
+          }
+      }
+
+
+     let meuBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: dados,
+        options: options
+      });
+
+  });
+}
   window.onload = function(event) {
     renderiza_cumprimento('{% url "cumprimento" %}')
+    renderiza_cumprimento_series('{% url "cumprimento" %}')
+    renderiza_cumprimento_bimestres('{% url "cumprimento" %}')
+    renderiza_cumprimento_bimestres_series('{% url "cumprimento" %}')
+    renderiza_cumprimento_bimestres_series('{% url "cumprimento" %}')
+    renderiza_cumprimento_curriculo_jurisdicao('{% url "cumprimento" %}')
+    renderiza_cumprimento_curriculo_jurisdicao_geral('{% url "cumprimento" %}')
+    renderiza_cumprimento_curriculo_disciplina('{% url "cumprimento" %}')
+    renderiza_cumprimento_curriculo_ensino('{% url "cumprimento" %}')
   };
 </script>
 {% endblock scripts %}
