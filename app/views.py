@@ -48,8 +48,9 @@ def login(request):
         else:
             return render(request, 'negado.html')
 
+
 def painel(request):
-    return render(request, 'login.html')
+    return render(request, 'login.html', {'user': request.user} )
 
 
 @login_required
@@ -58,6 +59,10 @@ def plataforma(request):
         return render(request, 'login.html')
     else:
         return render('negado.html')
+
+def getRelatorio(request):
+    return render(request, 'relatorio.html')
+
 
 def dashboard(request):
     return render(request, 'dashboard.html')
@@ -487,6 +492,335 @@ def getCumprimento(request):
     qtd_professores_3_b4 = len(professores_3_b4)
 
 
+    #Cumprimento por Turnos
+
+    #serie 2
+
+    respostas_2_b1_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b1_1[0].id,perguntas_2_b1_1[-1].id,perguntas_2_b1_2[0].id,perguntas_2_b1_2[-1].id])
+    qtd_respostas_2_b1_mat = len(respostas_2_b1_mat)
+    professores_2_b1_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b1_1[0].id,perguntas_2_b1_1[-1].id,perguntas_2_b1_2[0].id,perguntas_2_b1_2[-1].id])
+    qtd_professores_2_b1_mat = len(professores_2_b1_mat)
+
+    respostas_2_b2_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b2_1[0].id,perguntas_2_b2_1[-1].id,perguntas_2_b2_2[0].id,perguntas_2_b2_2[-1].id])
+    qtd_respostas_2_b2_mat = len(respostas_2_b2_mat)
+    professores_2_b2_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b2_1[0].id,perguntas_2_b2_1[-1].id,perguntas_2_b2_2[0].id,perguntas_2_b2_2[-1].id])
+    qtd_professores_2_b2_mat = len(professores_2_b2_mat)
+
+    respostas_2_b3_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b3_1[0].id,perguntas_2_b3_1[-1].id,perguntas_2_b3_2[0].id,perguntas_2_b3_2[-1].id])
+    qtd_respostas_2_b3_mat = len(respostas_2_b3_mat)
+    professores_2_b3_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b3_1[0].id,perguntas_2_b3_1[-1].id,perguntas_2_b3_2[0].id,perguntas_2_b3_2[-1].id])
+    qtd_professores_2_b3_mat = len(professores_2_b3_mat)
+
+    respostas_2_b4_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b4_1[0].id,perguntas_2_b4_1[-1].id,perguntas_2_b4_2[0].id,perguntas_2_b4_2[-1].id])
+    qtd_respostas_2_b4_mat = len(respostas_2_b4_mat)
+    professores_2_b4_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b4_1[0].id,perguntas_2_b4_1[-1].id,perguntas_2_b4_2[0].id,perguntas_2_b4_2[-1].id])
+    qtd_professores_2_b4_mat = len(professores_2_b4_mat)
+
+    respostas_2_b1_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b1_1[0].id,perguntas_2_b1_1[-1].id,perguntas_2_b1_2[0].id,perguntas_2_b1_2[-1].id])
+    qtd_respostas_2_b1_vesp = len(respostas_2_b1_vesp)
+    professores_2_b1_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b1_1[0].id,perguntas_2_b1_1[-1].id,perguntas_2_b1_2[0].id,perguntas_2_b1_2[-1].id])
+    qtd_professores_2_b1_vesp = len(professores_2_b1_vesp)
+
+    respostas_2_b2_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b2_1[0].id,perguntas_2_b2_1[-1].id,perguntas_2_b2_2[0].id,perguntas_2_b2_2[-1].id])
+    qtd_respostas_2_b2_vesp = len(respostas_2_b2_vesp)
+    professores_2_b2_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b2_1[0].id,perguntas_2_b2_1[-1].id,perguntas_2_b2_2[0].id,perguntas_2_b2_2[-1].id])
+    qtd_professores_2_b2_vesp = len(professores_2_b2_vesp)
+
+    respostas_2_b3_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b3_1[0].id,perguntas_2_b3_1[-1].id,perguntas_2_b3_2[0].id,perguntas_2_b3_2[-1].id])
+    qtd_respostas_2_b3_vesp = len(respostas_2_b3_vesp)
+    professores_2_b3_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b3_1[0].id,perguntas_2_b3_1[-1].id,perguntas_2_b3_2[0].id,perguntas_2_b3_2[-1].id])
+    qtd_professores_2_b3_vesp = len(professores_2_b3_vesp)
+
+    respostas_2_b4_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b4_1[0].id,perguntas_2_b4_1[-1].id,perguntas_2_b4_2[0].id,perguntas_2_b4_2[-1].id])
+    qtd_respostas_2_b4_vesp = len(respostas_2_b4_vesp)
+    professores_2_b4_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b4_1[0].id,perguntas_2_b4_1[-1].id,perguntas_2_b4_2[0].id,perguntas_2_b4_2[-1].id])
+    qtd_professores_2_b4_vesp = len(professores_2_b4_vesp)
+
+    respostas_2_b1_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b1_1[0].id,perguntas_2_b1_1[-1].id,perguntas_2_b1_2[0].id,perguntas_2_b1_2[-1].id])
+    qtd_respostas_2_b1_not = len(respostas_2_b1_not)
+    professores_2_b1_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b1_1[0].id,perguntas_2_b1_1[-1].id,perguntas_2_b1_2[0].id,perguntas_2_b1_2[-1].id])
+    qtd_professores_2_b1_not = len(professores_2_b1_not)
+
+    respostas_2_b2_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b2_1[0].id,perguntas_2_b2_1[-1].id,perguntas_2_b2_2[0].id,perguntas_2_b2_2[-1].id])
+    qtd_respostas_2_b2_not = len(respostas_2_b2_not)
+    professores_2_b2_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b2_1[0].id,perguntas_2_b2_1[-1].id,perguntas_2_b2_2[0].id,perguntas_2_b2_2[-1].id])
+    qtd_professores_2_b2_not = len(professores_2_b2_not)
+
+    respostas_2_b3_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b3_1[0].id,perguntas_2_b3_1[-1].id,perguntas_2_b3_2[0].id,perguntas_2_b3_2[-1].id])
+    qtd_respostas_2_b3_not = len(respostas_2_b3_not)
+    professores_2_b3_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b3_1[0].id,perguntas_2_b3_1[-1].id,perguntas_2_b3_2[0].id,perguntas_2_b3_2[-1].id])
+    qtd_professores_2_b3_not = len(professores_2_b3_not)
+
+    respostas_2_b4_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b4_1[0].id,perguntas_2_b4_1[-1].id,perguntas_2_b4_2[0].id,perguntas_2_b4_2[-1].id])
+    qtd_respostas_2_b4_not = len(respostas_2_b4_not)
+    professores_2_b4_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b4_1[0].id,perguntas_2_b4_1[-1].id,perguntas_2_b4_2[0].id,perguntas_2_b4_2[-1].id])
+    qtd_professores_2_b4_not = len(professores_2_b4_not)
+
+    respostas_2_b1_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b1_1[0].id,perguntas_2_b1_1[-1].id,perguntas_2_b1_2[0].id,perguntas_2_b1_2[-1].id])
+    qtd_respostas_2_b1_integ = len(respostas_2_b1_integ)
+    professores_2_b1_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b1_1[0].id,perguntas_2_b1_1[-1].id,perguntas_2_b1_2[0].id,perguntas_2_b1_2[-1].id])
+    qtd_professores_2_b1_integ = len(professores_2_b1_integ)
+
+    respostas_2_b2_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b2_1[0].id,perguntas_2_b2_1[-1].id,perguntas_2_b2_2[0].id,perguntas_2_b2_2[-1].id])
+    qtd_respostas_2_b2_integ = len(respostas_2_b2_integ)
+    professores_2_b2_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b2_1[0].id,perguntas_2_b2_1[-1].id,perguntas_2_b2_2[0].id,perguntas_2_b2_2[-1].id])
+    qtd_professores_2_b2_integ = len(professores_2_b2_integ)
+
+    respostas_2_b3_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b3_1[0].id,perguntas_2_b3_1[-1].id,perguntas_2_b3_2[0].id,perguntas_2_b3_2[-1].id])
+    qtd_respostas_2_b3_integ = len(respostas_2_b3_integ)
+    professores_2_b3_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b3_1[0].id,perguntas_2_b3_1[-1].id,perguntas_2_b3_2[0].id,perguntas_2_b3_2[-1].id])
+    qtd_professores_2_b3_integ = len(professores_2_b3_integ)
+
+    respostas_2_b4_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_2_b4_1[0].id,perguntas_2_b4_1[-1].id,perguntas_2_b4_2[0].id,perguntas_2_b4_2[-1].id])
+    qtd_respostas_2_b4_integ = len(respostas_2_b4_integ)
+    professores_2_b4_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_2_b4_1[0].id,perguntas_2_b4_1[-1].id,perguntas_2_b4_2[0].id,perguntas_2_b4_2[-1].id])
+    qtd_professores_2_b4_integ = len(professores_2_b4_integ)
+
+# serie 5
+
+    respostas_5_b1_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b1_1[0].id,perguntas_5_b1_1[-1].id,perguntas_5_b1_2[0].id,perguntas_5_b1_2[-1].id])
+    qtd_respostas_5_b1_mat = len(respostas_5_b1_mat)
+    professores_5_b1_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b1_1[0].id,perguntas_5_b1_1[-1].id,perguntas_5_b1_2[0].id,perguntas_5_b1_2[-1].id])
+    qtd_professores_5_b1_mat = len(professores_5_b1_mat)
+
+    respostas_5_b2_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b2_1[0].id,perguntas_5_b2_1[-1].id,perguntas_5_b2_2[0].id,perguntas_5_b2_2[-1].id])
+    qtd_respostas_5_b2_mat = len(respostas_5_b2_mat)
+    professores_5_b2_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b2_1[0].id,perguntas_5_b2_1[-1].id,perguntas_5_b2_2[0].id,perguntas_5_b2_2[-1].id])
+    qtd_professores_5_b2_mat = len(professores_5_b2_mat)
+
+    respostas_5_b3_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b3_1[0].id,perguntas_5_b3_1[-1].id,perguntas_5_b3_2[0].id,perguntas_5_b3_2[-1].id])
+    qtd_respostas_5_b3_mat = len(respostas_5_b3_mat)
+    professores_5_b3_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b3_1[0].id,perguntas_5_b3_1[-1].id,perguntas_5_b3_2[0].id,perguntas_5_b3_2[-1].id])
+    qtd_professores_5_b3_mat = len(professores_5_b3_mat)
+
+    respostas_5_b4_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b4_1[0].id,perguntas_5_b4_1[-1].id,perguntas_5_b4_2[0].id,perguntas_5_b4_2[-1].id])
+    qtd_respostas_5_b4_mat = len(respostas_5_b4_mat)
+    professores_5_b4_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b4_1[0].id,perguntas_5_b4_1[-1].id,perguntas_5_b4_2[0].id,perguntas_5_b4_2[-1].id])
+    qtd_professores_5_b4_mat = len(professores_5_b4_mat)
+
+    respostas_5_b1_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b1_1[0].id,perguntas_5_b1_1[-1].id,perguntas_5_b1_2[0].id,perguntas_5_b1_2[-1].id])
+    qtd_respostas_5_b1_vesp = len(respostas_5_b1_vesp)
+    professores_5_b1_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b1_1[0].id,perguntas_5_b1_1[-1].id,perguntas_5_b1_2[0].id,perguntas_5_b1_2[-1].id])
+    qtd_professores_5_b1_vesp = len(professores_5_b1_vesp)
+
+    respostas_5_b2_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b2_1[0].id,perguntas_5_b2_1[-1].id,perguntas_5_b2_2[0].id,perguntas_5_b2_2[-1].id])
+    qtd_respostas_5_b2_vesp = len(respostas_5_b2_vesp)
+    professores_5_b2_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b2_1[0].id,perguntas_5_b2_1[-1].id,perguntas_5_b2_2[0].id,perguntas_5_b2_2[-1].id])
+    qtd_professores_5_b2_vesp = len(professores_5_b2_vesp)
+
+    respostas_5_b3_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b3_1[0].id,perguntas_5_b3_1[-1].id,perguntas_5_b3_2[0].id,perguntas_5_b3_2[-1].id])
+    qtd_respostas_5_b3_vesp = len(respostas_5_b3_vesp)
+    professores_5_b3_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b3_1[0].id,perguntas_5_b3_1[-1].id,perguntas_5_b3_2[0].id,perguntas_5_b3_2[-1].id])
+    qtd_professores_5_b3_vesp = len(professores_5_b3_vesp)
+
+    respostas_5_b4_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b4_1[0].id,perguntas_5_b4_1[-1].id,perguntas_5_b4_2[0].id,perguntas_5_b4_2[-1].id])
+    qtd_respostas_5_b4_vesp = len(respostas_5_b4_vesp)
+    professores_5_b4_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b4_1[0].id,perguntas_5_b4_1[-1].id,perguntas_5_b4_2[0].id,perguntas_5_b4_2[-1].id])
+    qtd_professores_5_b4_vesp = len(professores_5_b4_vesp)
+
+    respostas_5_b1_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b1_1[0].id,perguntas_5_b1_1[-1].id,perguntas_5_b1_2[0].id,perguntas_5_b1_2[-1].id])
+    qtd_respostas_5_b1_not = len(respostas_5_b1_not)
+    professores_5_b1_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b1_1[0].id,perguntas_5_b1_1[-1].id,perguntas_5_b1_2[0].id,perguntas_5_b1_2[-1].id])
+    qtd_professores_5_b1_not = len(professores_5_b1_not)
+
+    respostas_5_b2_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b2_1[0].id,perguntas_5_b2_1[-1].id,perguntas_5_b2_2[0].id,perguntas_5_b2_2[-1].id])
+    qtd_respostas_5_b2_not = len(respostas_5_b2_not)
+    professores_5_b2_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b2_1[0].id,perguntas_5_b2_1[-1].id,perguntas_5_b2_2[0].id,perguntas_5_b2_2[-1].id])
+    qtd_professores_5_b2_not = len(professores_5_b2_not)
+
+    respostas_5_b3_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b3_1[0].id,perguntas_5_b3_1[-1].id,perguntas_5_b3_2[0].id,perguntas_5_b3_2[-1].id])
+    qtd_respostas_5_b3_not = len(respostas_5_b3_not)
+    professores_5_b3_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b3_1[0].id,perguntas_5_b3_1[-1].id,perguntas_5_b3_2[0].id,perguntas_5_b3_2[-1].id])
+    qtd_professores_5_b3_not = len(professores_5_b3_not)
+
+    respostas_5_b4_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b4_1[0].id,perguntas_5_b4_1[-1].id,perguntas_5_b4_2[0].id,perguntas_5_b4_2[-1].id])
+    qtd_respostas_5_b4_not = len(respostas_5_b4_not)
+    professores_5_b4_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b4_1[0].id,perguntas_5_b4_1[-1].id,perguntas_5_b4_2[0].id,perguntas_5_b4_2[-1].id])
+    qtd_professores_5_b4_not = len(professores_5_b4_not)
+
+    respostas_5_b1_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b1_1[0].id,perguntas_5_b1_1[-1].id,perguntas_5_b1_2[0].id,perguntas_5_b1_2[-1].id])
+    qtd_respostas_5_b1_integ = len(respostas_5_b1_integ)
+    professores_5_b1_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b1_1[0].id,perguntas_5_b1_1[-1].id,perguntas_5_b1_2[0].id,perguntas_5_b1_2[-1].id])
+    qtd_professores_5_b1_integ = len(professores_5_b1_integ)
+
+    respostas_5_b2_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b2_1[0].id,perguntas_5_b2_1[-1].id,perguntas_5_b2_2[0].id,perguntas_5_b2_2[-1].id])
+    qtd_respostas_5_b2_integ = len(respostas_5_b2_integ)
+    professores_5_b2_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b2_1[0].id,perguntas_5_b2_1[-1].id,perguntas_5_b2_2[0].id,perguntas_5_b2_2[-1].id])
+    qtd_professores_5_b2_integ = len(professores_5_b2_integ)
+
+    respostas_5_b3_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b3_1[0].id,perguntas_5_b3_1[-1].id,perguntas_5_b3_2[0].id,perguntas_5_b3_2[-1].id])
+    qtd_respostas_5_b3_integ = len(respostas_5_b3_integ)
+    professores_5_b3_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b3_1[0].id,perguntas_5_b3_1[-1].id,perguntas_5_b3_2[0].id,perguntas_5_b3_2[-1].id])
+    qtd_professores_5_b3_integ = len(professores_5_b3_integ)
+
+    respostas_5_b4_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_5_b4_1[0].id,perguntas_5_b4_1[-1].id,perguntas_5_b4_2[0].id,perguntas_5_b4_2[-1].id])
+    qtd_respostas_5_b4_integ = len(respostas_5_b4_integ)
+    professores_5_b4_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_5_b4_1[0].id,perguntas_5_b4_1[-1].id,perguntas_5_b4_2[0].id,perguntas_5_b4_2[-1].id])
+    qtd_professores_5_b4_integ = len(professores_5_b4_integ)
+
+# serie 9
+
+    respostas_9_b1_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b1_1[0].id,perguntas_9_b1_1[-1].id,perguntas_9_b1_2[0].id,perguntas_9_b1_2[-1].id])
+    qtd_respostas_9_b1_mat = len(respostas_9_b1_mat)
+    professores_9_b1_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b1_1[0].id,perguntas_9_b1_1[-1].id,perguntas_9_b1_2[0].id,perguntas_9_b1_2[-1].id])
+    qtd_professores_9_b1_mat = len(professores_9_b1_mat)
+
+    respostas_9_b2_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b2_1[0].id,perguntas_9_b2_1[-1].id,perguntas_9_b2_2[0].id,perguntas_9_b2_2[-1].id])
+    qtd_respostas_9_b2_mat = len(respostas_9_b2_mat)
+    professores_9_b2_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b2_1[0].id,perguntas_9_b2_1[-1].id,perguntas_9_b2_2[0].id,perguntas_9_b2_2[-1].id])
+    qtd_professores_9_b2_mat = len(professores_9_b2_mat)
+
+    respostas_9_b3_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b3_1[0].id,perguntas_9_b3_1[-1].id,perguntas_9_b3_2[0].id,perguntas_9_b3_2[-1].id])
+    qtd_respostas_9_b3_mat = len(respostas_9_b3_mat)
+    professores_9_b3_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b3_1[0].id,perguntas_9_b3_1[-1].id,perguntas_9_b3_2[0].id,perguntas_9_b3_2[-1].id])
+    qtd_professores_9_b3_mat = len(professores_9_b3_mat)
+
+    respostas_9_b4_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b4_1[0].id,perguntas_9_b4_1[-1].id,perguntas_9_b4_2[0].id,perguntas_9_b4_2[-1].id])
+    qtd_respostas_9_b4_mat = len(respostas_9_b4_mat)
+    professores_9_b4_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b4_1[0].id,perguntas_9_b4_1[-1].id,perguntas_9_b4_2[0].id,perguntas_9_b4_2[-1].id])
+    qtd_professores_9_b4_mat = len(professores_9_b4_mat)
+
+    respostas_9_b1_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b1_1[0].id,perguntas_9_b1_1[-1].id,perguntas_9_b1_2[0].id,perguntas_9_b1_2[-1].id])
+    qtd_respostas_9_b1_vesp = len(respostas_9_b1_vesp)
+    professores_9_b1_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b1_1[0].id,perguntas_9_b1_1[-1].id,perguntas_9_b1_2[0].id,perguntas_9_b1_2[-1].id])
+    qtd_professores_9_b1_vesp = len(professores_9_b1_vesp)
+
+    respostas_9_b2_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b2_1[0].id,perguntas_9_b2_1[-1].id,perguntas_9_b2_2[0].id,perguntas_9_b2_2[-1].id])
+    qtd_respostas_9_b2_vesp = len(respostas_9_b2_vesp)
+    professores_9_b2_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b2_1[0].id,perguntas_9_b2_1[-1].id,perguntas_9_b2_2[0].id,perguntas_9_b2_2[-1].id])
+    qtd_professores_9_b2_vesp = len(professores_9_b2_vesp)
+
+    respostas_9_b3_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b3_1[0].id,perguntas_9_b3_1[-1].id,perguntas_9_b3_2[0].id,perguntas_9_b3_2[-1].id])
+    qtd_respostas_9_b3_vesp = len(respostas_9_b3_vesp)
+    professores_9_b3_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b3_1[0].id,perguntas_9_b3_1[-1].id,perguntas_9_b3_2[0].id,perguntas_9_b3_2[-1].id])
+    qtd_professores_9_b3_vesp = len(professores_9_b3_vesp)
+
+    respostas_9_b4_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b4_1[0].id,perguntas_9_b4_1[-1].id,perguntas_9_b4_2[0].id,perguntas_9_b4_2[-1].id])
+    qtd_respostas_9_b4_vesp = len(respostas_9_b4_vesp)
+    professores_9_b4_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b4_1[0].id,perguntas_9_b4_1[-1].id,perguntas_9_b4_2[0].id,perguntas_9_b4_2[-1].id])
+    qtd_professores_9_b4_vesp = len(professores_9_b4_vesp)
+
+    respostas_9_b1_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b1_1[0].id,perguntas_9_b1_1[-1].id,perguntas_9_b1_2[0].id,perguntas_9_b1_2[-1].id])
+    qtd_respostas_9_b1_not = len(respostas_9_b1_not)
+    professores_9_b1_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b1_1[0].id,perguntas_9_b1_1[-1].id,perguntas_9_b1_2[0].id,perguntas_9_b1_2[-1].id])
+    qtd_professores_9_b1_not = len(professores_9_b1_not)
+
+    respostas_9_b2_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b2_1[0].id,perguntas_9_b2_1[-1].id,perguntas_9_b2_2[0].id,perguntas_9_b2_2[-1].id])
+    qtd_respostas_9_b2_not = len(respostas_9_b2_not)
+    professores_9_b2_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b2_1[0].id,perguntas_9_b2_1[-1].id,perguntas_9_b2_2[0].id,perguntas_9_b2_2[-1].id])
+    qtd_professores_9_b2_not = len(professores_9_b2_not)
+
+    respostas_9_b3_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b3_1[0].id,perguntas_9_b3_1[-1].id,perguntas_9_b3_2[0].id,perguntas_9_b3_2[-1].id])
+    qtd_respostas_9_b3_not = len(respostas_9_b3_not)
+    professores_9_b3_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b3_1[0].id,perguntas_9_b3_1[-1].id,perguntas_9_b3_2[0].id,perguntas_9_b3_2[-1].id])
+    qtd_professores_9_b3_not = len(professores_9_b3_not)
+
+    respostas_9_b4_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b4_1[0].id,perguntas_9_b4_1[-1].id,perguntas_9_b4_2[0].id,perguntas_9_b4_2[-1].id])
+    qtd_respostas_9_b4_not = len(respostas_9_b4_not)
+    professores_9_b4_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b4_1[0].id,perguntas_9_b4_1[-1].id,perguntas_9_b4_2[0].id,perguntas_9_b4_2[-1].id])
+    qtd_professores_9_b4_not = len(professores_9_b4_not)
+
+    respostas_9_b1_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b1_1[0].id,perguntas_9_b1_1[-1].id,perguntas_9_b1_2[0].id,perguntas_9_b1_2[-1].id])
+    qtd_respostas_9_b1_integ = len(respostas_9_b1_integ)
+    professores_9_b1_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b1_1[0].id,perguntas_9_b1_1[-1].id,perguntas_9_b1_2[0].id,perguntas_9_b1_2[-1].id])
+    qtd_professores_9_b1_integ = len(professores_9_b1_integ)
+
+    respostas_9_b2_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b2_1[0].id,perguntas_9_b2_1[-1].id,perguntas_9_b2_2[0].id,perguntas_9_b2_2[-1].id])
+    qtd_respostas_9_b2_integ = len(respostas_9_b2_integ)
+    professores_9_b2_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b2_1[0].id,perguntas_9_b2_1[-1].id,perguntas_9_b2_2[0].id,perguntas_9_b2_2[-1].id])
+    qtd_professores_9_b2_integ = len(professores_9_b2_integ)
+
+    respostas_9_b3_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b3_1[0].id,perguntas_9_b3_1[-1].id,perguntas_9_b3_2[0].id,perguntas_9_b3_2[-1].id])
+    qtd_respostas_9_b3_integ = len(respostas_9_b3_integ)
+    professores_9_b3_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b3_1[0].id,perguntas_9_b3_1[-1].id,perguntas_9_b3_2[0].id,perguntas_9_b3_2[-1].id])
+    qtd_professores_9_b3_integ = len(professores_9_b3_integ)
+
+    respostas_9_b4_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_9_b4_1[0].id,perguntas_9_b4_1[-1].id,perguntas_9_b4_2[0].id,perguntas_9_b4_2[-1].id])
+    qtd_respostas_9_b4_integ = len(respostas_9_b4_integ)
+    professores_9_b4_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_9_b4_1[0].id,perguntas_9_b4_1[-1].id,perguntas_9_b4_2[0].id,perguntas_9_b4_2[-1].id])
+    qtd_professores_9_b4_integ = len(professores_9_b4_integ)
+
+# serie 3
+
+    respostas_3_b1_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b1_1[0].id,perguntas_3_b1_1[-1].id,perguntas_3_b1_2[0].id,perguntas_3_b1_2[-1].id])
+    qtd_respostas_3_b1_mat = len(respostas_3_b1_mat)
+    professores_3_b1_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b1_1[0].id,perguntas_3_b1_1[-1].id,perguntas_3_b1_2[0].id,perguntas_3_b1_2[-1].id])
+    qtd_professores_3_b1_mat = len(professores_3_b1_mat)
+
+    respostas_3_b2_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b2_1[0].id,perguntas_3_b2_1[-1].id,perguntas_3_b2_2[0].id,perguntas_3_b2_2[-1].id])
+    qtd_respostas_3_b2_mat = len(respostas_3_b2_mat)
+    professores_3_b2_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b2_1[0].id,perguntas_3_b2_1[-1].id,perguntas_3_b2_2[0].id,perguntas_3_b2_2[-1].id])
+    qtd_professores_3_b2_mat = len(professores_3_b2_mat)
+
+    respostas_3_b3_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b3_1[0].id,perguntas_3_b3_1[-1].id,perguntas_3_b3_2[0].id,perguntas_3_b3_2[-1].id])
+    qtd_respostas_3_b3_mat = len(respostas_3_b3_mat)
+    professores_3_b3_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b3_1[0].id,perguntas_3_b3_1[-1].id,perguntas_3_b3_2[0].id,perguntas_3_b3_2[-1].id])
+    qtd_professores_3_b3_mat = len(professores_3_b3_mat)
+
+    respostas_3_b4_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b4_1[0].id,perguntas_3_b4_1[-1].id,perguntas_3_b4_2[0].id,perguntas_3_b4_2[-1].id])
+    qtd_respostas_3_b4_mat = len(respostas_3_b4_mat)
+    professores_3_b4_mat = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Matutino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b4_1[0].id,perguntas_3_b4_1[-1].id,perguntas_3_b4_2[0].id,perguntas_3_b4_2[-1].id])
+    qtd_professores_3_b4_mat = len(professores_3_b4_mat)
+
+    respostas_3_b1_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b1_1[0].id,perguntas_3_b1_1[-1].id,perguntas_3_b1_2[0].id,perguntas_3_b1_2[-1].id])
+    qtd_respostas_3_b1_vesp = len(respostas_3_b1_vesp)
+    professores_3_b1_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b1_1[0].id,perguntas_3_b1_1[-1].id,perguntas_3_b1_2[0].id,perguntas_3_b1_2[-1].id])
+    qtd_professores_3_b1_vesp = len(professores_3_b1_vesp)
+
+    respostas_3_b2_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b2_1[0].id,perguntas_3_b2_1[-1].id,perguntas_3_b2_2[0].id,perguntas_3_b2_2[-1].id])
+    qtd_respostas_3_b2_vesp = len(respostas_3_b2_vesp)
+    professores_3_b2_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b2_1[0].id,perguntas_3_b2_1[-1].id,perguntas_3_b2_2[0].id,perguntas_3_b2_2[-1].id])
+    qtd_professores_3_b2_vesp = len(professores_3_b2_vesp)
+
+    respostas_3_b3_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b3_1[0].id,perguntas_3_b3_1[-1].id,perguntas_3_b3_2[0].id,perguntas_3_b3_2[-1].id])
+    qtd_respostas_3_b3_vesp = len(respostas_3_b3_vesp)
+    professores_3_b3_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b3_1[0].id,perguntas_3_b3_1[-1].id,perguntas_3_b3_2[0].id,perguntas_3_b3_2[-1].id])
+    qtd_professores_3_b3_vesp = len(professores_3_b3_vesp)
+
+    respostas_3_b4_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b4_1[0].id,perguntas_3_b4_1[-1].id,perguntas_3_b4_2[0].id,perguntas_3_b4_2[-1].id])
+    qtd_respostas_3_b4_vesp = len(respostas_3_b4_vesp)
+    professores_3_b4_vesp = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Vespertino" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b4_1[0].id,perguntas_3_b4_1[-1].id,perguntas_3_b4_2[0].id,perguntas_3_b4_2[-1].id])
+    qtd_professores_3_b4_vesp = len(professores_3_b4_vesp)
+
+    respostas_3_b1_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b1_1[0].id,perguntas_3_b1_1[-1].id,perguntas_3_b1_2[0].id,perguntas_3_b1_2[-1].id])
+    qtd_respostas_3_b1_not = len(respostas_3_b1_not)
+    professores_3_b1_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b1_1[0].id,perguntas_3_b1_1[-1].id,perguntas_3_b1_2[0].id,perguntas_3_b1_2[-1].id])
+    qtd_professores_3_b1_not = len(professores_3_b1_not)
+
+    respostas_3_b2_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b2_1[0].id,perguntas_3_b2_1[-1].id,perguntas_3_b2_2[0].id,perguntas_3_b2_2[-1].id])
+    qtd_respostas_3_b2_not = len(respostas_3_b2_not)
+    professores_3_b2_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b2_1[0].id,perguntas_3_b2_1[-1].id,perguntas_3_b2_2[0].id,perguntas_3_b2_2[-1].id])
+    qtd_professores_3_b2_not = len(professores_3_b2_not)
+
+    respostas_3_b3_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b3_1[0].id,perguntas_3_b3_1[-1].id,perguntas_3_b3_2[0].id,perguntas_3_b3_2[-1].id])
+    qtd_respostas_3_b3_not = len(respostas_3_b3_not)
+    professores_3_b3_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b3_1[0].id,perguntas_3_b3_1[-1].id,perguntas_3_b3_2[0].id,perguntas_3_b3_2[-1].id])
+    qtd_professores_3_b3_not = len(professores_3_b3_not)
+
+    respostas_3_b4_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b4_1[0].id,perguntas_3_b4_1[-1].id,perguntas_3_b4_2[0].id,perguntas_3_b4_2[-1].id])
+    qtd_respostas_3_b4_not = len(respostas_3_b4_not)
+    professores_3_b4_not = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Noturno" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b4_1[0].id,perguntas_3_b4_1[-1].id,perguntas_3_b4_2[0].id,perguntas_3_b4_2[-1].id])
+    qtd_professores_3_b4_not = len(professores_3_b4_not)
+
+    respostas_3_b1_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b1_1[0].id,perguntas_3_b1_1[-1].id,perguntas_3_b1_2[0].id,perguntas_3_b1_2[-1].id])
+    qtd_respostas_3_b1_integ = len(respostas_3_b1_integ)
+    professores_3_b1_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b1_1[0].id,perguntas_3_b1_1[-1].id,perguntas_3_b1_2[0].id,perguntas_3_b1_2[-1].id])
+    qtd_professores_3_b1_integ = len(professores_3_b1_integ)
+
+    respostas_3_b2_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b2_1[0].id,perguntas_3_b2_1[-1].id,perguntas_3_b2_2[0].id,perguntas_3_b2_2[-1].id])
+    qtd_respostas_3_b2_integ = len(respostas_3_b2_integ)
+    professores_3_b2_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b2_1[0].id,perguntas_3_b2_1[-1].id,perguntas_3_b2_2[0].id,perguntas_3_b2_2[-1].id])
+    qtd_professores_3_b2_integ = len(professores_3_b2_integ)
+
+    respostas_3_b3_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b3_1[0].id,perguntas_3_b3_1[-1].id,perguntas_3_b3_2[0].id,perguntas_3_b3_2[-1].id])
+    qtd_respostas_3_b3_integ = len(respostas_3_b3_integ)
+    professores_3_b3_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b3_1[0].id,perguntas_3_b3_1[-1].id,perguntas_3_b3_2[0].id,perguntas_3_b3_2[-1].id])
+    qtd_professores_3_b3_integ = len(professores_3_b3_integ)
+
+    respostas_3_b4_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 order by professor_id',[perguntas_3_b4_1[0].id,perguntas_3_b4_1[-1].id,perguntas_3_b4_2[0].id,perguntas_3_b4_2[-1].id])
+    qtd_respostas_3_b4_integ = len(respostas_3_b4_integ)
+    professores_3_b4_integ = Resposta.objects.raw('SELECT * FROM app_resposta as r join app_professor as p on p.id = r.professor_id join app_turno as t on t.id = p.turno_id where t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 or t.turno = "Integral" and r.pergunta_id >= %s and r.pergunta_id <= %s and r.resposta = 1 and foi_possivel = 1 group by professor_id',[perguntas_3_b4_1[0].id,perguntas_3_b4_1[-1].id,perguntas_3_b4_2[0].id,perguntas_3_b4_2[-1].id])
+    qtd_professores_3_b4_integ = len(professores_3_b4_integ)
 
 
     #cumprimento jurisdicao
@@ -838,6 +1172,127 @@ def getCumprimento(request):
     qtd_perguntas_3_b4_pt =  len(perguntas_3_b4_2)
 
 
+    #calculo turno mat serie 2
+
+    total_perguntas_2_mat = (qtd_perguntas_2_b1* qtd_professores_2_b1_mat) + (qtd_perguntas_2_b2* qtd_professores_2_b2_mat) + (qtd_perguntas_2_b3* qtd_professores_2_b3_mat) + (qtd_perguntas_2_b4* qtd_professores_2_b4_mat)
+    total_respostas_2_mat = qtd_respostas_2_b1_mat + qtd_respostas_2_b2_mat + qtd_respostas_2_b3_mat + qtd_respostas_2_b4_mat
+    por_2_mat = (total_respostas_2_mat * 100) / total_perguntas_2_mat
+
+    #calculo turno mat serie 5
+
+    total_perguntas_5_mat = (qtd_perguntas_5_b1* qtd_professores_5_b1_mat) + (qtd_perguntas_5_b2* qtd_professores_5_b2_mat) + (qtd_perguntas_5_b3* qtd_professores_5_b3_mat) + (qtd_perguntas_5_b4* qtd_professores_5_b4_mat)
+    total_respostas_5_mat = qtd_respostas_5_b1_mat + qtd_respostas_5_b2_mat + qtd_respostas_5_b3_mat + qtd_respostas_5_b4_mat
+    por_5_mat = (total_respostas_5_mat * 100) / total_perguntas_5_mat
+
+    #calculo turno mat serie 9
+
+    total_perguntas_9_mat = (qtd_perguntas_9_b1* qtd_professores_9_b1_mat) + (qtd_perguntas_9_b2* qtd_professores_9_b2_mat) + (qtd_perguntas_9_b3* qtd_professores_9_b3_mat) + (qtd_perguntas_9_b4* qtd_professores_9_b4_mat)
+    total_respostas_9_mat = qtd_respostas_9_b1_mat + qtd_respostas_9_b2_mat + qtd_respostas_9_b3_mat + qtd_respostas_9_b4_mat
+    por_9_mat = (total_respostas_9_mat * 100) / total_perguntas_9_mat
+
+    #calculo turno mat serie 3
+
+    total_perguntas_3_mat = (qtd_perguntas_3_b1* qtd_professores_3_b1_mat) + (qtd_perguntas_3_b2* qtd_professores_3_b2_mat) + (qtd_perguntas_3_b3* qtd_professores_3_b3_mat) + (qtd_perguntas_3_b4* qtd_professores_3_b4_mat)
+    total_respostas_3_mat = qtd_respostas_3_b1_mat + qtd_respostas_3_b2_mat + qtd_respostas_3_b3_mat + qtd_respostas_3_b4_mat
+    por_3_mat = (total_respostas_3_mat * 100) / total_perguntas_3_mat
+
+
+
+    #calculo turno vesp serie 2
+
+    total_perguntas_2_vesp = (qtd_perguntas_2_b1* qtd_professores_2_b1_vesp) + (qtd_perguntas_2_b2* qtd_professores_2_b2_vesp) + (qtd_perguntas_2_b3* qtd_professores_2_b3_vesp) + (qtd_perguntas_2_b4* qtd_professores_2_b4_vesp)
+    total_respostas_2_vesp = qtd_respostas_2_b1_vesp + qtd_respostas_2_b2_vesp + qtd_respostas_2_b3_vesp + qtd_respostas_2_b4_vesp
+    por_2_vesp = (total_respostas_2_vesp * 100) / total_perguntas_2_vesp
+
+    #calculo turno vesp serie 5
+
+    total_perguntas_5_vesp = (qtd_perguntas_5_b1* qtd_professores_5_b1_vesp) + (qtd_perguntas_5_b2* qtd_professores_5_b2_vesp) + (qtd_perguntas_5_b3* qtd_professores_5_b3_vesp) + (qtd_perguntas_5_b4* qtd_professores_5_b4_vesp)
+    total_respostas_5_vesp = qtd_respostas_5_b1_vesp + qtd_respostas_5_b2_vesp + qtd_respostas_5_b3_vesp + qtd_respostas_5_b4_vesp
+    por_5_vesp = (total_respostas_5_vesp * 100) / total_perguntas_5_vesp
+
+    #calculo turno vesp serie 9
+
+    total_perguntas_9_vesp = (qtd_perguntas_9_b1* qtd_professores_9_b1_vesp) + (qtd_perguntas_9_b2* qtd_professores_9_b2_vesp) + (qtd_perguntas_9_b3* qtd_professores_9_b3_vesp) + (qtd_perguntas_9_b4* qtd_professores_9_b4_vesp)
+    total_respostas_9_vesp = qtd_respostas_9_b1_vesp + qtd_respostas_9_b2_vesp + qtd_respostas_9_b3_vesp + qtd_respostas_9_b4_vesp
+    por_9_vesp = (total_respostas_9_vesp * 100) / total_perguntas_9_vesp
+
+    #calculo turno vesp serie 3
+
+    total_perguntas_3_vesp = (qtd_perguntas_3_b1* qtd_professores_3_b1_vesp) + (qtd_perguntas_3_b2* qtd_professores_3_b2_vesp) + (qtd_perguntas_3_b3* qtd_professores_3_b3_vesp) + (qtd_perguntas_3_b4* qtd_professores_3_b4_vesp)
+    total_respostas_3_vesp = qtd_respostas_3_b1_vesp + qtd_respostas_3_b2_vesp + qtd_respostas_3_b3_vesp + qtd_respostas_3_b4_vesp
+    por_3_vesp = (total_respostas_3_vesp * 100) / total_perguntas_3_vesp
+
+    #calculo turno not serie 2
+
+    total_perguntas_2_not = (qtd_perguntas_2_b1* qtd_professores_2_b1_not) + (qtd_perguntas_2_b2* qtd_professores_2_b2_not) + (qtd_perguntas_2_b3* qtd_professores_2_b3_not) + (qtd_perguntas_2_b4* qtd_professores_2_b4_not)
+    total_respostas_2_not = qtd_respostas_2_b1_not + qtd_respostas_2_b2_not + qtd_respostas_2_b3_not + qtd_respostas_2_b4_not
+    por_2_not = (total_respostas_2_not * 100) / total_perguntas_2_not
+
+    #calculo turno not serie 5
+
+    total_perguntas_5_not = (qtd_perguntas_5_b1* qtd_professores_5_b1_not) + (qtd_perguntas_5_b2* qtd_professores_5_b2_not) + (qtd_perguntas_5_b3* qtd_professores_5_b3_not) + (qtd_perguntas_5_b4* qtd_professores_5_b4_not)
+    total_respostas_5_not = qtd_respostas_5_b1_not + qtd_respostas_5_b2_not + qtd_respostas_5_b3_not + qtd_respostas_5_b4_not
+    por_5_not = (total_respostas_5_not * 100) / total_perguntas_5_not
+
+    #calculo turno not serie 9
+
+    total_perguntas_9_not = (qtd_perguntas_9_b1* qtd_professores_9_b1_not) + (qtd_perguntas_9_b2* qtd_professores_9_b2_not) + (qtd_perguntas_9_b3* qtd_professores_9_b3_not) + (qtd_perguntas_9_b4* qtd_professores_9_b4_not)
+    total_respostas_9_not = qtd_respostas_9_b1_not + qtd_respostas_9_b2_not + qtd_respostas_9_b3_not + qtd_respostas_9_b4_not
+    por_9_not = (total_respostas_9_not * 100) / total_perguntas_9_not
+
+    #calculo turno not serie 3
+
+    total_perguntas_3_not = (qtd_perguntas_3_b1* qtd_professores_3_b1_not) + (qtd_perguntas_3_b2* qtd_professores_3_b2_not) + (qtd_perguntas_3_b3* qtd_professores_3_b3_not) + (qtd_perguntas_3_b4* qtd_professores_3_b4_not)
+    total_respostas_3_not = qtd_respostas_3_b1_not + qtd_respostas_3_b2_not + qtd_respostas_3_b3_not + qtd_respostas_3_b4_not
+    por_3_not = (total_respostas_3_not * 100) / total_perguntas_3_not
+
+    #calculo turno integ serie 2
+
+    total_perguntas_2_integ = (qtd_perguntas_2_b1* qtd_professores_2_b1_integ) + (qtd_perguntas_2_b2* qtd_professores_2_b2_integ) + (qtd_perguntas_2_b3* qtd_professores_2_b3_integ) + (qtd_perguntas_2_b4* qtd_professores_2_b4_integ)
+    total_respostas_2_integ = qtd_respostas_2_b1_integ + qtd_respostas_2_b2_integ + qtd_respostas_2_b3_integ + qtd_respostas_2_b4_integ
+    por_2_integ = (total_respostas_2_integ * 100) / total_perguntas_2_integ
+
+    #calculo turno integ serie 5
+
+    total_perguntas_5_integ = (qtd_perguntas_5_b1* qtd_professores_5_b1_integ) + (qtd_perguntas_5_b2* qtd_professores_5_b2_integ) + (qtd_perguntas_5_b3* qtd_professores_5_b3_integ) + (qtd_perguntas_5_b4* qtd_professores_5_b4_integ)
+    total_respostas_5_integ = qtd_respostas_5_b1_integ + qtd_respostas_5_b2_integ + qtd_respostas_5_b3_integ + qtd_respostas_5_b4_integ
+    por_5_integ = (total_respostas_5_integ * 100) / total_perguntas_5_integ
+
+    #calculo turno integ serie 9
+
+    total_perguntas_9_integ = (qtd_perguntas_9_b1* qtd_professores_9_b1_integ) + (qtd_perguntas_9_b2* qtd_professores_9_b2_integ) + (qtd_perguntas_9_b3* qtd_professores_9_b3_integ) + (qtd_perguntas_9_b4* qtd_professores_9_b4_integ)
+    total_respostas_9_integ = qtd_respostas_9_b1_integ + qtd_respostas_9_b2_integ + qtd_respostas_9_b3_integ + qtd_respostas_9_b4_integ
+    por_9_integ = (total_respostas_9_integ * 100) / total_perguntas_9_integ
+
+    #calculo turno integ serie 3
+
+    total_perguntas_3_integ = (qtd_perguntas_3_b1* qtd_professores_3_b1_integ) + (qtd_perguntas_3_b2* qtd_professores_3_b2_integ) + (qtd_perguntas_3_b3* qtd_professores_3_b3_integ) + (qtd_perguntas_3_b4* qtd_professores_3_b4_integ)
+    total_respostas_3_integ = qtd_respostas_3_b1_integ + qtd_respostas_3_b2_integ + qtd_respostas_3_b3_integ + qtd_respostas_3_b4_integ
+    por_3_integ = (total_respostas_3_integ * 100) / total_perguntas_3_integ
+
+    #calculo turno mat geral
+
+    total_perguntas_mat = total_perguntas_2_mat + total_perguntas_5_mat + total_perguntas_9_mat + total_perguntas_3_mat
+    total_respostas_mat = total_respostas_2_mat + total_respostas_5_mat + total_respostas_9_mat + total_respostas_3_mat
+    por_mat = (total_respostas_mat * 100) / total_perguntas_mat
+
+    #calculo turno vesp geral
+
+    total_perguntas_vesp = total_perguntas_2_vesp + total_perguntas_5_vesp + total_perguntas_9_vesp + total_perguntas_3_vesp
+    total_respostas_vesp = total_respostas_2_vesp + total_respostas_5_vesp + total_respostas_9_vesp + total_respostas_3_vesp
+    por_vesp = (total_respostas_vesp * 100) / total_perguntas_vesp
+
+    #calculo turno not geral
+
+    total_perguntas_not = total_perguntas_2_not + total_perguntas_5_not + total_perguntas_9_not + total_perguntas_3_not
+    total_respostas_not = total_respostas_2_not + total_respostas_5_not + total_respostas_9_not + total_respostas_3_not
+    por_not = (total_respostas_not * 100) / total_perguntas_not
+
+    #calculo turno integ geral
+
+    total_perguntas_integ = total_perguntas_2_integ + total_perguntas_5_integ + total_perguntas_9_integ + total_perguntas_3_integ
+    total_respostas_integ = total_respostas_2_integ + total_respostas_5_integ + total_respostas_9_integ + total_respostas_3_integ
+    por_integ = (total_respostas_integ * 100) / total_perguntas_integ
 
 
     #calculo b1
@@ -1037,12 +1492,107 @@ def getCumprimento(request):
         'por_cumprimento_ef': "%.2f" % por_cumprimento_ef,
         'por_mt' : "%.2f" % por_mt,
         'por_pt' : "%.2f" % por_pt,
+        'por_2_mat': "%.2f" % por_2_mat,
+        'por_2_vesp': "%.2f" % por_2_vesp,
+        'por_2_not': "%.2f" % por_2_not,
+        'por_2_integ': "%.2f" % por_2_integ,
+        'por_5_mat': "%.2f" % por_5_mat,
+        'por_5_vesp': "%.2f" % por_5_vesp,
+        'por_5_not': "%.2f" % por_5_not,
+        'por_5_integ': "%.2f" % por_5_integ,
+        'por_9_mat': "%.2f" % por_9_mat,
+        'por_9_vesp': "%.2f" % por_9_vesp,
+        'por_9_not': "%.2f" % por_9_not,
+        'por_9_integ': "%.2f" % por_9_integ,
+        'por_3_mat': "%.2f" % por_3_mat,
+        'por_3_vesp': "%.2f" % por_3_vesp,
+        'por_3_not': "%.2f" % por_3_not,
+        'por_3_integ': "%.2f" % por_3_integ,
+        'por_mat': "%.2f" % por_mat,
+        'por_vesp': "%.2f" % por_vesp,
+        'por_not': "%.2f" % por_not,
+        'por_integ': "%.2f" % por_integ,
     }
 
 
     return JsonResponse(data_json)
 
 
-# Jurisdição cumprimento
+# coordenadoria cumprimento
+def coordenadoria_cumprimento(request):
+    coordenadorias =Coordenadoria.objects.all().order_by('id')
+    respostas = []
+    professores = []
+    qtd_perguntas = []
+    qtd_respostas = []
+    qtd_professores = []
+    cont_res = 0
+    cont_prof = 0
+    cont_res_v = 0
+    for coordenadoria in coordenadorias:
+        professores_coord = Professor.objects.filter(coordenadoria_id=coordenadoria.id)
+        for professor in professores_coord:
+            resposta = Resposta.objects.filter(professor_id=professor.id)
+            if resposta.count() != 0:
+                professores.append(professor)
+                respostas.append(resposta)
+    for coordenadoria in coordenadorias:
+        cont_res =0
+        cont_res_v = 0
+        for professor in professores:
+            if professor.coordenadoria_id == coordenadoria.id:
+                for resposta in respostas:
+                    for res in resposta:
+                        if res.professor_id == professor.id:
+                            if res.foi_possivel == 1:
+                                cont_res += 1
+                                if res.resposta == 1:
+                                    cont_res_v += 1
+        qtd_respostas.append(cont_res_v)
+        qtd_perguntas.append(cont_res)
+
+
+    for coordenadoria in coordenadorias:
+        cont_prof = 0
+        for professor in professores:
+            if professor.coordenadoria_id == coordenadoria.id:
+                for resposta in respostas:
+                    for res in resposta:
+                        if res.professor_id == professor.id:
+                            if res.foi_possivel == 1:
+                                cont_prof += 1
+                            break
+        qtd_professores.append(cont_prof)
+
+    print("qtd total de perguntas: ", qtd_perguntas[0])
+    print("qtd total de respostas verdadeiras: ", qtd_respostas[0])
+    print("qtd total de professores que responderam: ", qtd_professores[0])
+
+    por_coord = []
+    for i in range(68):
+        if qtd_professores[i] == 0 or qtd_perguntas[i] == 0:
+            calculo = 0
+            por_coord.append(calculo)
+        else:
+            calculo = (qtd_respostas[i] * 100) / (qtd_perguntas[i] * qtd_professores[i])
+            por_coord.append("%.2f" % calculo)
+
+    cap_coord = []
+    for i in range (6):
+        cap_coord.append(por_coord[i])
+
+    int_coord = []
+    for i in range (61):
+        int_coord.append(por_coord[i+6])
+
+    print("porcentagem: ",  int_coord[7])
+
+    data_json={
+        'por_coord':  por_coord,
+        'cap_coord': cap_coord,
+        'int_coord': int_coord,
+    }
+    return JsonResponse(data_json)
+
 
 

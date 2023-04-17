@@ -7,44 +7,70 @@
 
 <div class="container">
 <center>
-  <div class="row justify-content-md-center" style="margin-bottom: 5vh;">
-    <div class="col" style="position: relative;  height: 30vh; width: 100vw; margin-bottom: 5vh;">
-      <h5>Cumprimento do curriculo</h5>
+  <div class="row justify-content-md-center" style="margin-bottom: 1vh;">
+    <div class="col" style="position: relative;  height: 33vh; width: 100vw; margin-bottom: 5vh;">
+      <h5>Cumprimento Geral do Currículo</h5>
       <canvas id="cumprimento_curriculo" ></canvas>
     </div>
     <div class="col" style="position: relative; height: 30vh; width: 100vw; margin-bottom: 5vh;">
-      <h5>Relação Respostas Capital-Interior</h5>
+      <h5>Relação de Respostas - Capital/Interior</h5>
       <canvas id="cumprimento_curriculo_jurisdicao" ></canvas>
     </div>
     <div class="col" style="position: relative; height: 35vh; width: 85vw;">
-      <h5 style="margin-bottom: 5vh;">Cumprimento do curriculo por Jurisdição</h5>
+      <h5 style="margin-bottom: 7vh;">Cumprimento Geral do Currículo por Jurisdição</h5>
       <canvas id="cumprimento_curriculo_jurisdicao_geral" ></canvas>
     </div>
   </div>
-  <div class="row" style="margin-bottom: 5vh;">
-    <div class="col" style="position: relative; height: 35vh; width: 85vw;">
-      <h5 style="margin-bottom: 5vh;">Cumprimento do curriculo por Bimestre</h5>
-      <canvas id="cumprimento_curriculo_bimestre" ></canvas>
-    </div>
-    <div class="col" style="position: relative;  height: 35vh; width: 85vw; margin-bottom: 5vh;">
-      <h5 style="margin-bottom: 5vh;">Cumprimento do curriculo por Serie/Bimestre</h5>
-      <canvas id="cumprimento_curriculo_serie_bimestre" ></canvas>
-    </div>
-    </div>
-  <div class="row" style="margin-bottom: 5vh;">
-    <div class="col" style="position: relative;  height: 35vh; width: 85vw; ">
-      <h5 style="margin-bottom: 8vh;">Cumprimento do curriculo por Serie</h5>
-      <canvas id="cumprimento_curriculo_serie" ></canvas>
-    </div>
-    <div class="col" style="position: relative; height: 35vh; width: 85vw;">
-      <h5 style="margin-bottom: 5vh;">Cumprimento do curriculo por Disciplina</h5>
-      <canvas id="cumprimento_curriculo_disciplina" ></canvas>
-    </div>
-    <div class="col" style="position: relative; height: 35vh; width: 85vw;">
-      <h5 style="margin-bottom: 5vh;">Cumprimento do curriculo por Nível de Ensino</h5>
-      <canvas id="cumprimento_curriculo_ensino" ></canvas>
-    </div>
+  <hr>
+  <div class="row" style="margin-bottom: 13vh;margin-top: 5vh">
+      <div class="col" style="position: relative;  height: 35vh; width: 85vw; ">
+        <h5 style="margin-bottom: 5vh;">Cumprimento Geral do Currículo por Coordenadoria - Capital</h5>
+        <canvas id="cumprimento_curriculo_coord_cap" ></canvas>
+       </div>
+      <div class="col" style="position: relative;  height: 35vh; width: 85vw; ">
+        <h5 style="margin-bottom: 5vh;">Cumprimento Geral do Currículo por Coordenadoria - Interior</h5>
+        <canvas id="cumprimento_curriculo_coord_int" ></canvas>
+       </div>
   </div>
+  <hr style="margin-top: 5vh;margin-bottom: 5vh">
+      <div class="row" style="margin-bottom: 8vh;margin-top: 5vh">
+        <div class="col" style="position: relative;  height: 35vh; width: 85vw; ">
+        <h5 style="margin-bottom: 5vh;">Cumprimento Geral do Currículo por Turno</h5>
+        <canvas id="cumprimento_curriculo_turno" ></canvas>
+       </div>
+      <div class="col" style="position: relative; height: 35vh; width: 85vw;">
+        <h5 style="margin-bottom: 5vh;">Cumprimento Geral do Currículo por Bimestre</h5>
+        <canvas id="cumprimento_curriculo_bimestre" ></canvas>
+       </div>
+      </div>
+ <hr style="margin-top: 5vh;margin-bottom: 5vh">
+     <div class="row" style="margin-bottom: 5vh;margin-top: 5vh">
+        <div class="col" style="position: relative;  height: 35vh; width: 85vw; margin-bottom: 2vh;">
+          <h5 style="margin-bottom: 5vh;margin-right: 5vh;">Cumprimento do Currículo - Relação Série/Turno</h5>
+          <canvas id="cumprimento_curriculo_serie_turno" ></canvas>
+        </div>
+        <div class="col" style="position: relative;  height: 35vh; width: 85vw; margin-bottom: 5vh;">
+          <h5 style="margin-bottom: 5vh; margin-left: 5vh;">Cumprimento do Currículo - Relação Série/Bimestre</h5>
+          <canvas id="cumprimento_curriculo_serie_bimestre" ></canvas>
+        </div>
+
+      </div>
+  <hr style="margin-top: 5vh;margin-bottom: 5vh">
+    <div class="row" style="margin-top: 5vh;">
+      <div class="col" style="position: relative;  height: 35vh; width: 85vw; ">
+        <h5 style="margin-bottom: 5vh;">Cumprimento Geral do Currículo por Série</h5>
+        <canvas id="cumprimento_curriculo_serie" ></canvas>
+      </div>
+      <div class="col" style="position: relative; height: 35vh; width: 85vw;">
+        <h5 style="margin-bottom: 5vh;">Cumprimento Geral do Currículo por Disciplina</h5>
+        <canvas id="cumprimento_curriculo_disciplina" ></canvas>
+       </div>
+      <div class="col" style="position: relative; height: 35vh; width: 85vw;">
+        <h5 style="margin-bottom: 5vh;">Cumprimento Geral do Currículo por Nível de Ensino</h5>
+        <canvas id="cumprimento_curriculo_ensino" ></canvas>
+      </div>
+    </div>
+
 </center>
 </div>
 
@@ -96,7 +122,7 @@
           // cria-se um vetor data, com os valores a ser dispostos no gráfico
             data: [data.total_serie_2, data.total_serie_5,data.total_serie_9,data.total_serie_3],
           // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
-           backgroundColor: ['rgb(165, 215, 232)' ,'rgb(87, 108, 188)','rgb(25, 55, 109)' ,'rgb(32, 47, 88)']
+           backgroundColor: ['rgb(165, 215, 232)' ,'rgb(87, 108, 188)','#144eb5' ,'rgb(32, 47, 88)']
         }],
        // cria-se legendas para os respectivos valores do vetor data
        labels: ['2 º  Ano EF', '5 º  Ano EF','9 º  Ano EF','3 ª Série EM']
@@ -128,6 +154,52 @@
   });
 }
 
+  function renderiza_cumprimento_turnos(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+      const ctx = document.getElementById('cumprimento_curriculo_turno').getContext('2d');
+
+    let dados = {
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: [data.por_mat, data.por_vesp,data.por_not,data.por_integ],
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor: ['rgb(165, 215, 232)' ,'rgb(87, 108, 188)','#144eb5' ,'rgb(32, 47, 88)']
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+       labels: ['Matutino', 'Vespertino','Noturno','Integral']
+     };
+
+
+      let options = {
+          scales: {
+            y: {
+              min:0,
+              max:100
+            }
+          },
+          plugins:{
+            legend:{
+              display: false
+            }
+          }
+
+      }
+
+
+     let meuBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: dados,
+        options: options
+      });
+
+  });
+}
+
+
 
 
 
@@ -144,7 +216,7 @@ function renderiza_cumprimento_bimestres(url){
           // cria-se um vetor data, com os valores a ser dispostos no gráfico
             data: [data.total_b1, data.total_b2,data.total_b3,data.total_b4],
           // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
-           backgroundColor: ['rgb(165, 215, 232)' ,'rgb(87, 108, 188)','rgb(25, 55, 109)' ,'rgb(32, 47, 88)']
+           backgroundColor: ['rgb(165, 215, 232)' ,'rgb(87, 108, 188)','#144eb5' ,'rgb(32, 47, 88)']
         }],
        // cria-se legendas para os respectivos valores do vetor data
        labels: ['1º Bimestre', '2º Bimestre','3º Bimestre','4º Bimestre']
@@ -202,11 +274,66 @@ function renderiza_cumprimento_bimestres_series(url){
       {
         label:'3º Bimestre',
         data: [data.por_2_b3,data.por_5_b3,data.por_9_b3,data.por_3_b3],
-        backgroundColor: ['rgb(25, 55, 109)']
+        backgroundColor: ['#144eb5']
       },
       {
         label:'4º Bimestre',
         data: [data.por_2_b4,data.por_5_b4,data.por_9_b4,data.por_3_b4],
+        backgroundColor: ['rgb(32, 47, 88)']
+      },
+      ]
+    };
+
+      let options = {
+          scales: {
+            y: {
+              min:0,
+              max:100
+            }
+          },
+
+
+      }
+
+
+     let meuBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: dados,
+        options: options
+      });
+
+  });
+}
+
+function renderiza_cumprimento_turnos_series(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+      const ctx = document.getElementById('cumprimento_curriculo_serie_turno').getContext('2d');
+    let labels_series = ['2 º  Ano EF', '5 º  Ano EF','9 º  Ano EF','3 ª  Série EM']
+
+    let dados = {
+      labels: labels_series,
+      datasets:[{
+        label:'Matutino',
+        data: [data.por_2_mat,data.por_5_mat,data.por_9_mat,data.por_3_mat],
+        backgroundColor: ['rgb(165, 215, 232)']
+      },
+      {
+        label:'Vespertino',
+        data: [data.por_2_vesp,data.por_5_vesp,data.por_9_vesp,data.por_3_vesp],
+        backgroundColor: ['rgb(87, 108, 188)']
+      },
+      {
+        label:'Noturno',
+        data: [data.por_2_not,data.por_5_not,data.por_9_not,data.por_3_not],
+        backgroundColor: ['#144eb5']
+      },
+      {
+        label:'Integral',
+        data: [data.por_2_integ,data.por_5_integ,data.por_9_integ,data.por_3_integ],
         backgroundColor: ['rgb(32, 47, 88)']
       },
       ]
@@ -402,16 +529,127 @@ function renderiza_cumprimento_curriculo_ensino(url){
 
   });
 }
+
+
+function gera_cor(qtd=1){
+    var bg_color = []
+    var border_color = []
+    for(let i = 0; i < qtd; i++){
+        let r = Math.random() * 255;
+        let g = Math.random() * 255;
+        let b = Math.random() * 255;
+        bg_color.push(`rgba(${r}, ${g}, ${b}, ${0.2})`)
+        border_color.push(`rgba(${r}, ${g}, ${b}, ${1})`)
+    }
+
+    return [bg_color, border_color];
+
+  }
+
+function renderiza_cumprimento_coordenadoria_cap(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+    const ctx = document.getElementById('cumprimento_curriculo_coord_cap').getContext('2d');
+    var cores_coordenadorias = gera_cor(qtd=68)
+    let coordenadorias = ["CDE 01", "CDE 02", "CDE 03", "CDE 04", "CDE 05", "CDE 06", "CDE 07"]
+
+    let dados = {
+      labels:coordenadorias,
+      datasets:[{
+        label:"Cumprimento",
+        data: data.cap_coord,
+        backgroundColor: ["#191970", "#0000FF", "#6495ED", "#00BFFF", "#1E90FF", "#87CEFA", "#87CEEB"]
+      }]
+    }
+
+
+    let options = {
+          scales: {
+            y: {
+              min:0,
+              max:100
+            }
+          },
+          plugins:{
+            legend:{
+              display: false
+            }
+          }
+
+      }
+
+    let meuBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: dados,
+        options: options
+      });
+
+  });
+}
+
+function renderiza_cumprimento_coordenadoria_int(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+    const ctx = document.getElementById('cumprimento_curriculo_coord_int').getContext('2d');
+    var cores_coordenadorias = gera_cor(qtd=61)
+    let coordenadorias = ["Alvarães", "Amaturá", "Anamã", "Anori", "Apuí", "Atalaia do Norte", "Autazes", "Barcelos", "Barreirinha", "Benjamin Constant", "Beruri", "Boa Vista do Ramos", "Boca do Acre", "Borba", "Caapiranga", "Canutama", "Carauari", "Careiro", "Careiro da Várzea", "Coari", "Codajás", "Eirunepé", "Envira", "Fonte Boa", "Guajará", "Humaitá", "Ipixuna", "Iranduba", "Itacoatiara", "Itamarati", "Itapiranga", "Japurá", "Juruá", "Jutaí", "Lábrea", "Manacapuru", "Manaquiri", "Manicoré", "Maraã", "Maués", "Nhamundá", "Nova Olinda do Norte", "Novo Airão", "Novo Aripuanã", "Parintins", "Pauini", "Presidente Figueiredo", "Rio Preto da Eva", "Santa Isabel do Rio Negro", "Santo Antônio do Içá", "São Gabriel da Cachoeira", "São Paulo de Olivença", "São Sebastião do Uatumã", "Silves", "Tabatinga", "Tapauá", "Tefé", "Tonantins", "Uarini", "Urucará", "Urucurituba"]
+
+    let dados = {
+      labels:coordenadorias,
+      datasets:[{
+        label:"Cumprimento",
+        data: data.int_coord,
+        backgroundColor: ["#000033", "#000066", "#000099", "#0000CC", "#0000FF", "#003366", "#003399", "#0033CC", "#0033FF", "#006699", "#0066CC", "#0066FF", "#0099CC", "#0099FF", "#00CCFF", "#330066", "#330099", "#3300CC", "#3300FF", "#333366", "#333399", "#3333CC", "#3333FF", "#336699", "#3366CC", "#3366FF", "#3399CC", "#3399FF", "#33CCFF", "#660033", "#660066", "#660099", "#6600CC", "#6600FF", "#663366", "#663399", "#6633CC", "#6633FF", "#666699", "#6666CC", "#6666FF", "#6699CC", "#6699FF", "#66CCFF", "#990033", "#990066", "#990099", "#9900CC", "#9900FF", "#993366", "#993399", "#9933CC", "#9933FF", "#996699", "#9966CC", "#9966FF", "#9999CC", "#9999FF", "#99CCFF", "#CC0033", "#CC0066"]
+      }]
+    }
+
+
+    let options = {
+          scales: {
+            y: {
+              min:0,
+              max:100
+            },
+            x: {
+        display: false, // Define a visibilidade da legenda do eixo x
+      }
+          },
+          plugins:{
+            legend:{
+              display: false
+            }
+          }
+
+      }
+
+    let meuBarChart = new Chart(ctx, {
+        type: 'bar',
+        data: dados,
+        options: options
+      });
+
+  });
+}
+
   window.onload = function(event) {
     renderiza_cumprimento('{% url "cumprimento" %}')
     renderiza_cumprimento_series('{% url "cumprimento" %}')
     renderiza_cumprimento_bimestres('{% url "cumprimento" %}')
     renderiza_cumprimento_bimestres_series('{% url "cumprimento" %}')
-    renderiza_cumprimento_bimestres_series('{% url "cumprimento" %}')
+    renderiza_cumprimento_turnos_series('{% url "cumprimento" %}')
     renderiza_cumprimento_curriculo_jurisdicao('{% url "cumprimento" %}')
     renderiza_cumprimento_curriculo_jurisdicao_geral('{% url "cumprimento" %}')
     renderiza_cumprimento_curriculo_disciplina('{% url "cumprimento" %}')
     renderiza_cumprimento_curriculo_ensino('{% url "cumprimento" %}')
+    renderiza_cumprimento_turnos('{% url "cumprimento" %}')
+    renderiza_cumprimento_coordenadoria_cap('{% url "coordenadoria" %}')
+    renderiza_cumprimento_coordenadoria_int('{% url "coordenadoria" %}')
   };
 </script>
 {% endblock scripts %}

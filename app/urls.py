@@ -18,6 +18,8 @@ urlpatterns = [
     path('materias', views.getMaterias, name = "materias"),
     path('dashboard', views.dashboard, name = "dashboard"),
     path('cumprimento', views.getCumprimento, name = "cumprimento"),
+    path('coordenadoria', views.coordenadoria_cumprimento, name = "coordenadoria"),
+    path('relatorio', views.getRelatorio, name = "relatorio")
 
   #  path('resultado/', views.lista, name='resultado')
 
