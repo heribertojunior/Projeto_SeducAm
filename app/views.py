@@ -1784,14 +1784,14 @@ def coordenadoria_cumprimento(request):
             por_coord.append("%.2f" % calculo)
 
     cap_coord = []
-    for i in range (6):
+    for i in range (7):
+        print("cont : ", i)
         cap_coord.append(por_coord[i])
 
     int_coord = []
-    for i in range (61):
-        int_coord.append(por_coord[i+6])
-
-    print("porcentagem: ",  int_coord[7])
+    for i in range (68):
+        print("cont2 : ", i+7)
+        int_coord.append(por_coord[i+7])
 
     data_json={
         'por_coord':  por_coord,
