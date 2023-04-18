@@ -17,10 +17,33 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('app.urls')),
+    path('', views.home, name='inicio'),
+    path('painel/', views.painel, name ='painel'),
+    path('sobre/', views.sobre, name='sobre'),
+    path('dashboard', views.dashboard, name = "dashboard"),
+    path('relatorio', views.getRelatorio, name = "relatorio"),
+    path('formulario/', views.formulario, name ='form'),
+    path('resposta/', views.salvarResposta, name='resposta'),
+    path('coordenadorias', views.getCoordenadorias, name = "coordenadorias"),
+    path('escolas', views.getEscolas, name = "escolas"),
+    path('turnos', views.getTurnos, name = "turnos"),
+    path('series', views.getSeries, name = "series"),
+    path('turmas', views.getTurmas, name = "turmas"),
+    path('materias', views.getMaterias, name = "materias"),
+    path('dashboard', views.dashboard, name = "dashboard"),
+    path('cumprimento', views.getCumprimento, name = "cumprimento"),
+    path('coordenadoria', views.coordenadoria_cumprimento, name = "coordenadoria"),
+    path('relatorio', views.getRelatorio, name = "relatorio"),
+    path('grap_escolas', views.grap_escolas, name = "grap_escolas"),
+    path('lista_escolas', views.lista_escolas, name = "lista_escolas"),
+    path('painel', views.painel, name = "painel"),
+    path('lista_escolas_recusadas', views.lista_escolas_recusadas, name = "lista_escolas_recusadas"),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+

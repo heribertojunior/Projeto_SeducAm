@@ -2,7 +2,7 @@ from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
 from django.http.response import HttpResponse
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as login_django
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
@@ -20,55 +20,47 @@ from app.forms import PerguntaForm
 from app.models import Resposta
 from app.forms import RespostaForm
 from app.models import Escola, Turno , Serie, Turma, Materia, Serief, Materiaf, Bimestref
+import pandas as pd
+import mysql.connector
+from sqlalchemy import create_engine
+from io import BytesIO
+import xlsxwriter
 
 
-class IndexView(TemplateView):
-    template_name = "index.html"
+
+
+def home(requests):
+    return render(requests, 'sobre.html')
 
 class ModeloView(TemplateView):
     template_name = "model.html"
 
-class SobreView(TemplateView):
-    template_name = "sobre.html"
+def sobre(requests):
+     return render(requests, 'sobre.html')
 
 
 
-#Função para autenticar o login
-def login(request):
-    if request.method == "GET":
-        return render(request, 'index.html')
-    else:
-        username = request.POST.get('username')
-        senha = request.POST.get('senha')
-
-        user =authenticate(username=username, password=senha)
-
-        if user:
-            return render(request, 'login.html')
-        else:
-            return render(request, 'negado.html')
 
 
+#precisa autenticar o usuario
+@login_required
 def painel(request):
-    return render(request, 'login.html', {'user': request.user} )
+
+    return render(request, 'painel.html')
+
 
 
 @login_required
-def plataforma(request):
-    if request.user.is_authenticated:
-        return render(request, 'login.html')
-    else:
-        return render('negado.html')
-
 def getRelatorio(request):
     return render(request, 'relatorio.html')
 
-
+@login_required
 def dashboard(request):
     return render(request, 'dashboard.html')
 
 #Função para cadastrar professor e redirecionar para a página de perguntas
-def index(request):
+@login_required
+def formulario(request):
     if request.method == "GET":
         form_professor = ProfessorForm()
 
@@ -128,6 +120,7 @@ def index(request):
 
 
 #Função para salvar as respostas
+@login_required
 def salvarResposta(request):
 
 
@@ -236,41 +229,47 @@ def salvarResposta(request):
                 f_cont.save()
 
 
-        return render(request, "login.html")
+        return render(request, "painel.html")
     else:
-        return render(request, "login.html")
+        return render(request, "painel.html")
 
 #Funções para carregar os selects dinamicamente
+@login_required
 def getCoordenadorias(request):
     data = json.loads(request.body)
     jurisdicao_id = data["id"]
     coordenadorias = Coordenadoria.objects.filter(jurisdicao_id=jurisdicao_id)
     return JsonResponse(list(coordenadorias.values("id", "coordenadoria")), safe=False)
 
+@login_required
 def getEscolas(request):
     data = json.loads(request.body)
     coordenadoria_id = data["id"]
     escolas = Escola.objects.filter(coordenadoria_id=coordenadoria_id)
     return JsonResponse(list(escolas.values("id", "escola")), safe=False)
 
+@login_required
 def getTurnos(request):
     data = json.loads(request.body)
     escola_id = data["id"]
     turnos = Turno.objects.filter(escola_id=escola_id)
     return JsonResponse(list(turnos.values("id", "turno")), safe=False)
 
+@login_required
 def getSeries(request):
     data = json.loads(request.body)
     turno_id = data["id"]
     series = Serie.objects.filter(turno_id=turno_id)
     return JsonResponse(list(series.values("id", "serie")), safe=False)
 
+@login_required
 def getTurmas(request):
     data = json.loads(request.body)
     serie_id = data["id"]
     turmas = Turma.objects.filter(serie_id=serie_id)
     return JsonResponse(list(turmas.values("id", "turma")), safe=False)
 
+@login_required
 def getMaterias(request):
 
     data = json.loads(request.body)
@@ -279,7 +278,7 @@ def getMaterias(request):
     return JsonResponse(list(materias.values("id", "materia")), safe=False)
 
 
-
+@login_required
 def getCumprimento(request):
 
     #serie 2
@@ -1176,220 +1175,399 @@ def getCumprimento(request):
 
     total_perguntas_2_mat = (qtd_perguntas_2_b1* qtd_professores_2_b1_mat) + (qtd_perguntas_2_b2* qtd_professores_2_b2_mat) + (qtd_perguntas_2_b3* qtd_professores_2_b3_mat) + (qtd_perguntas_2_b4* qtd_professores_2_b4_mat)
     total_respostas_2_mat = qtd_respostas_2_b1_mat + qtd_respostas_2_b2_mat + qtd_respostas_2_b3_mat + qtd_respostas_2_b4_mat
-    por_2_mat = (total_respostas_2_mat * 100) / total_perguntas_2_mat
+
+    if total_perguntas_2_mat == 0:
+        por_2_mat = 0
+    else:
+        por_2_mat = (total_respostas_2_mat * 100) / total_perguntas_2_mat
 
     #calculo turno mat serie 5
 
     total_perguntas_5_mat = (qtd_perguntas_5_b1* qtd_professores_5_b1_mat) + (qtd_perguntas_5_b2* qtd_professores_5_b2_mat) + (qtd_perguntas_5_b3* qtd_professores_5_b3_mat) + (qtd_perguntas_5_b4* qtd_professores_5_b4_mat)
     total_respostas_5_mat = qtd_respostas_5_b1_mat + qtd_respostas_5_b2_mat + qtd_respostas_5_b3_mat + qtd_respostas_5_b4_mat
-    por_5_mat = (total_respostas_5_mat * 100) / total_perguntas_5_mat
+
+    if total_perguntas_5_mat == 0:
+        por_5_mat = 0
+    else:
+        por_5_mat = (total_respostas_5_mat * 100) / total_perguntas_5_mat
 
     #calculo turno mat serie 9
 
     total_perguntas_9_mat = (qtd_perguntas_9_b1* qtd_professores_9_b1_mat) + (qtd_perguntas_9_b2* qtd_professores_9_b2_mat) + (qtd_perguntas_9_b3* qtd_professores_9_b3_mat) + (qtd_perguntas_9_b4* qtd_professores_9_b4_mat)
     total_respostas_9_mat = qtd_respostas_9_b1_mat + qtd_respostas_9_b2_mat + qtd_respostas_9_b3_mat + qtd_respostas_9_b4_mat
-    por_9_mat = (total_respostas_9_mat * 100) / total_perguntas_9_mat
+
+    if total_perguntas_9_mat == 0:
+        por_9_mat = 0
+    else:
+        por_9_mat = (total_respostas_9_mat * 100) / total_perguntas_9_mat
 
     #calculo turno mat serie 3
 
     total_perguntas_3_mat = (qtd_perguntas_3_b1* qtd_professores_3_b1_mat) + (qtd_perguntas_3_b2* qtd_professores_3_b2_mat) + (qtd_perguntas_3_b3* qtd_professores_3_b3_mat) + (qtd_perguntas_3_b4* qtd_professores_3_b4_mat)
     total_respostas_3_mat = qtd_respostas_3_b1_mat + qtd_respostas_3_b2_mat + qtd_respostas_3_b3_mat + qtd_respostas_3_b4_mat
-    por_3_mat = (total_respostas_3_mat * 100) / total_perguntas_3_mat
 
-
+    if total_perguntas_3_mat == 0:
+        por_3_mat = 0
+    else:
+        por_3_mat = (total_respostas_3_mat * 100) / total_perguntas_3_mat
 
     #calculo turno vesp serie 2
 
     total_perguntas_2_vesp = (qtd_perguntas_2_b1* qtd_professores_2_b1_vesp) + (qtd_perguntas_2_b2* qtd_professores_2_b2_vesp) + (qtd_perguntas_2_b3* qtd_professores_2_b3_vesp) + (qtd_perguntas_2_b4* qtd_professores_2_b4_vesp)
     total_respostas_2_vesp = qtd_respostas_2_b1_vesp + qtd_respostas_2_b2_vesp + qtd_respostas_2_b3_vesp + qtd_respostas_2_b4_vesp
-    por_2_vesp = (total_respostas_2_vesp * 100) / total_perguntas_2_vesp
+
+
+    if total_perguntas_2_vesp == 0:
+        por_2_vesp = 0
+    else:
+        por_2_vesp = (total_respostas_2_vesp * 100) / total_perguntas_2_vesp
 
     #calculo turno vesp serie 5
 
     total_perguntas_5_vesp = (qtd_perguntas_5_b1* qtd_professores_5_b1_vesp) + (qtd_perguntas_5_b2* qtd_professores_5_b2_vesp) + (qtd_perguntas_5_b3* qtd_professores_5_b3_vesp) + (qtd_perguntas_5_b4* qtd_professores_5_b4_vesp)
     total_respostas_5_vesp = qtd_respostas_5_b1_vesp + qtd_respostas_5_b2_vesp + qtd_respostas_5_b3_vesp + qtd_respostas_5_b4_vesp
-    por_5_vesp = (total_respostas_5_vesp * 100) / total_perguntas_5_vesp
+
+    if total_perguntas_5_vesp == 0:
+        por_5_vesp = 0
+    else:
+        por_5_vesp = (total_respostas_5_vesp * 100) / total_perguntas_5_vesp
 
     #calculo turno vesp serie 9
 
     total_perguntas_9_vesp = (qtd_perguntas_9_b1* qtd_professores_9_b1_vesp) + (qtd_perguntas_9_b2* qtd_professores_9_b2_vesp) + (qtd_perguntas_9_b3* qtd_professores_9_b3_vesp) + (qtd_perguntas_9_b4* qtd_professores_9_b4_vesp)
     total_respostas_9_vesp = qtd_respostas_9_b1_vesp + qtd_respostas_9_b2_vesp + qtd_respostas_9_b3_vesp + qtd_respostas_9_b4_vesp
-    por_9_vesp = (total_respostas_9_vesp * 100) / total_perguntas_9_vesp
+
+    if total_perguntas_9_vesp == 0:
+        por_9_vesp = 0
+    else:
+        por_9_vesp = (total_respostas_9_vesp * 100) / total_perguntas_9_vesp
 
     #calculo turno vesp serie 3
 
     total_perguntas_3_vesp = (qtd_perguntas_3_b1* qtd_professores_3_b1_vesp) + (qtd_perguntas_3_b2* qtd_professores_3_b2_vesp) + (qtd_perguntas_3_b3* qtd_professores_3_b3_vesp) + (qtd_perguntas_3_b4* qtd_professores_3_b4_vesp)
     total_respostas_3_vesp = qtd_respostas_3_b1_vesp + qtd_respostas_3_b2_vesp + qtd_respostas_3_b3_vesp + qtd_respostas_3_b4_vesp
-    por_3_vesp = (total_respostas_3_vesp * 100) / total_perguntas_3_vesp
+
+    if total_perguntas_3_vesp == 0:
+        por_3_vesp = 0
+    else:
+        por_3_vesp = (total_respostas_3_vesp * 100) / total_perguntas_3_vesp
 
     #calculo turno not serie 2
 
     total_perguntas_2_not = (qtd_perguntas_2_b1* qtd_professores_2_b1_not) + (qtd_perguntas_2_b2* qtd_professores_2_b2_not) + (qtd_perguntas_2_b3* qtd_professores_2_b3_not) + (qtd_perguntas_2_b4* qtd_professores_2_b4_not)
     total_respostas_2_not = qtd_respostas_2_b1_not + qtd_respostas_2_b2_not + qtd_respostas_2_b3_not + qtd_respostas_2_b4_not
-    por_2_not = (total_respostas_2_not * 100) / total_perguntas_2_not
 
+    if total_perguntas_2_not == 0 :
+        por_2_not = 0
+    else:
+        por_2_not = (total_respostas_2_not * 100) / total_perguntas_2_not
     #calculo turno not serie 5
 
     total_perguntas_5_not = (qtd_perguntas_5_b1* qtd_professores_5_b1_not) + (qtd_perguntas_5_b2* qtd_professores_5_b2_not) + (qtd_perguntas_5_b3* qtd_professores_5_b3_not) + (qtd_perguntas_5_b4* qtd_professores_5_b4_not)
     total_respostas_5_not = qtd_respostas_5_b1_not + qtd_respostas_5_b2_not + qtd_respostas_5_b3_not + qtd_respostas_5_b4_not
-    por_5_not = (total_respostas_5_not * 100) / total_perguntas_5_not
+    if total_perguntas_5_not == 0 :
+        por_5_not = 0
+    else:
+        por_5_not = (total_respostas_5_not * 100) / total_perguntas_5_not
+
+
 
     #calculo turno not serie 9
 
     total_perguntas_9_not = (qtd_perguntas_9_b1* qtd_professores_9_b1_not) + (qtd_perguntas_9_b2* qtd_professores_9_b2_not) + (qtd_perguntas_9_b3* qtd_professores_9_b3_not) + (qtd_perguntas_9_b4* qtd_professores_9_b4_not)
     total_respostas_9_not = qtd_respostas_9_b1_not + qtd_respostas_9_b2_not + qtd_respostas_9_b3_not + qtd_respostas_9_b4_not
-    por_9_not = (total_respostas_9_not * 100) / total_perguntas_9_not
+    if total_perguntas_9_not == 0 :
+        por_9_not = 0
+    else:
+        por_9_not = (total_respostas_9_not * 100) / total_perguntas_9_not
+
 
     #calculo turno not serie 3
 
     total_perguntas_3_not = (qtd_perguntas_3_b1* qtd_professores_3_b1_not) + (qtd_perguntas_3_b2* qtd_professores_3_b2_not) + (qtd_perguntas_3_b3* qtd_professores_3_b3_not) + (qtd_perguntas_3_b4* qtd_professores_3_b4_not)
     total_respostas_3_not = qtd_respostas_3_b1_not + qtd_respostas_3_b2_not + qtd_respostas_3_b3_not + qtd_respostas_3_b4_not
-    por_3_not = (total_respostas_3_not * 100) / total_perguntas_3_not
-
+    if total_perguntas_3_not == 0 :
+        por_3_not = 0
+    else:
+        por_3_not = (total_respostas_3_not * 100) / total_perguntas_3_not
     #calculo turno integ serie 2
 
     total_perguntas_2_integ = (qtd_perguntas_2_b1* qtd_professores_2_b1_integ) + (qtd_perguntas_2_b2* qtd_professores_2_b2_integ) + (qtd_perguntas_2_b3* qtd_professores_2_b3_integ) + (qtd_perguntas_2_b4* qtd_professores_2_b4_integ)
     total_respostas_2_integ = qtd_respostas_2_b1_integ + qtd_respostas_2_b2_integ + qtd_respostas_2_b3_integ + qtd_respostas_2_b4_integ
-    por_2_integ = (total_respostas_2_integ * 100) / total_perguntas_2_integ
+    if total_perguntas_2_integ == 0 :
+        por_2_integ = 0
+    else:
+        por_2_integ = (total_respostas_2_integ * 100) / total_perguntas_2_integ
+
+
 
     #calculo turno integ serie 5
 
     total_perguntas_5_integ = (qtd_perguntas_5_b1* qtd_professores_5_b1_integ) + (qtd_perguntas_5_b2* qtd_professores_5_b2_integ) + (qtd_perguntas_5_b3* qtd_professores_5_b3_integ) + (qtd_perguntas_5_b4* qtd_professores_5_b4_integ)
     total_respostas_5_integ = qtd_respostas_5_b1_integ + qtd_respostas_5_b2_integ + qtd_respostas_5_b3_integ + qtd_respostas_5_b4_integ
-    por_5_integ = (total_respostas_5_integ * 100) / total_perguntas_5_integ
+    if total_perguntas_5_integ == 0 :
+        por_5_integ = 0
+    else:
+        por_5_integ = (total_respostas_5_integ * 100) / total_perguntas_5_integ
+
+
 
     #calculo turno integ serie 9
 
     total_perguntas_9_integ = (qtd_perguntas_9_b1* qtd_professores_9_b1_integ) + (qtd_perguntas_9_b2* qtd_professores_9_b2_integ) + (qtd_perguntas_9_b3* qtd_professores_9_b3_integ) + (qtd_perguntas_9_b4* qtd_professores_9_b4_integ)
     total_respostas_9_integ = qtd_respostas_9_b1_integ + qtd_respostas_9_b2_integ + qtd_respostas_9_b3_integ + qtd_respostas_9_b4_integ
-    por_9_integ = (total_respostas_9_integ * 100) / total_perguntas_9_integ
+    if total_perguntas_9_integ == 0 :
+        por_9_integ = 0
+    else:
+        por_9_integ = (total_respostas_9_integ * 100) / total_perguntas_9_integ
+
 
     #calculo turno integ serie 3
 
     total_perguntas_3_integ = (qtd_perguntas_3_b1* qtd_professores_3_b1_integ) + (qtd_perguntas_3_b2* qtd_professores_3_b2_integ) + (qtd_perguntas_3_b3* qtd_professores_3_b3_integ) + (qtd_perguntas_3_b4* qtd_professores_3_b4_integ)
     total_respostas_3_integ = qtd_respostas_3_b1_integ + qtd_respostas_3_b2_integ + qtd_respostas_3_b3_integ + qtd_respostas_3_b4_integ
-    por_3_integ = (total_respostas_3_integ * 100) / total_perguntas_3_integ
+    if total_perguntas_3_integ == 0 :
+        por_3_integ = 0
+    else:
+        por_3_integ = (total_respostas_3_integ * 100) / total_perguntas_3_integ
 
     #calculo turno mat geral
 
     total_perguntas_mat = total_perguntas_2_mat + total_perguntas_5_mat + total_perguntas_9_mat + total_perguntas_3_mat
     total_respostas_mat = total_respostas_2_mat + total_respostas_5_mat + total_respostas_9_mat + total_respostas_3_mat
-    por_mat = (total_respostas_mat * 100) / total_perguntas_mat
-
+    if total_perguntas_mat == 0:
+        por_mat = 0
+    else:
+        por_mat = (total_respostas_mat * 100) / total_perguntas_mat
     #calculo turno vesp geral
 
     total_perguntas_vesp = total_perguntas_2_vesp + total_perguntas_5_vesp + total_perguntas_9_vesp + total_perguntas_3_vesp
     total_respostas_vesp = total_respostas_2_vesp + total_respostas_5_vesp + total_respostas_9_vesp + total_respostas_3_vesp
-    por_vesp = (total_respostas_vesp * 100) / total_perguntas_vesp
+    if total_perguntas_vesp == 0:
+        por_vesp = 0
+    else:
+        por_vesp = (total_respostas_vesp * 100) / total_perguntas_vesp
+
+
 
     #calculo turno not geral
 
     total_perguntas_not = total_perguntas_2_not + total_perguntas_5_not + total_perguntas_9_not + total_perguntas_3_not
     total_respostas_not = total_respostas_2_not + total_respostas_5_not + total_respostas_9_not + total_respostas_3_not
-    por_not = (total_respostas_not * 100) / total_perguntas_not
+    if total_perguntas_not == 0:
+        por_not = 0
+    else:
+        por_not = (total_respostas_not * 100) / total_perguntas_not
 
     #calculo turno integ geral
 
     total_perguntas_integ = total_perguntas_2_integ + total_perguntas_5_integ + total_perguntas_9_integ + total_perguntas_3_integ
     total_respostas_integ = total_respostas_2_integ + total_respostas_5_integ + total_respostas_9_integ + total_respostas_3_integ
-    por_integ = (total_respostas_integ * 100) / total_perguntas_integ
+    if total_perguntas_integ == 0:
+        por_integ = 0
+    else:
+        por_integ = (total_respostas_integ * 100) / total_perguntas_integ
 
 
     #calculo b1
     total_perguntas_b1 = (qtd_perguntas_2_b1 * qtd_professores_2_b1) + (qtd_perguntas_5_b1 * qtd_professores_5_b1) + (qtd_perguntas_9_b1 * qtd_professores_9_b1) + (qtd_perguntas_3_b1 * qtd_professores_3_b1)
     total_respostas_b1 = qtd_respostas_2_b1 + qtd_respostas_5_b1 + qtd_respostas_9_b1 + qtd_respostas_3_b1
-    por_b1 = (total_respostas_b1 * 100) / total_perguntas_b1
+
+    if total_perguntas_b1 == 0:
+        por_b1 = 0
+    else:
+        por_b1 = (total_respostas_b1 * 100) / total_perguntas_b1
 
     #calculo b2
     total_perguntas_b2 = (qtd_perguntas_2_b2 * qtd_professores_2_b2) + (qtd_perguntas_5_b2 * qtd_professores_5_b2) + (qtd_perguntas_9_b2 * qtd_professores_9_b2) + (qtd_perguntas_3_b2 * qtd_professores_3_b2)
     total_respostas_b2 = qtd_respostas_2_b2 + qtd_respostas_5_b2 + qtd_respostas_9_b2 + qtd_respostas_3_b2
-    por_b2 = (total_respostas_b2 * 100) / total_perguntas_b2
+    if total_perguntas_b2 == 0:
+        por_b2 = 0
+    else:
+        por_b2 = (total_respostas_b2 * 100) / total_perguntas_b2
+
+
 
     #calculo b3
     total_perguntas_b3 = (qtd_perguntas_2_b3 * qtd_professores_2_b3) + (qtd_perguntas_5_b3 * qtd_professores_5_b3) + (qtd_perguntas_9_b3 * qtd_professores_9_b3) + (qtd_perguntas_3_b3 * qtd_professores_3_b3)
     total_respostas_b3 = qtd_respostas_2_b3 + qtd_respostas_5_b3 + qtd_respostas_9_b3 + qtd_respostas_3_b3
-    por_b3 = (total_respostas_b3 * 100) / total_perguntas_b3
+    if total_perguntas_b3 == 0:
+        por_b3 = 0
+    else:
+        por_b3 = (total_respostas_b3 * 100) / total_perguntas_b3
+
+
 
     #calculo b4
     total_perguntas_b4 = (qtd_perguntas_2_b4 * qtd_professores_2_b4) + (qtd_perguntas_5_b4 * qtd_professores_5_b4) + (qtd_perguntas_9_b4 * qtd_professores_9_b4) + (qtd_perguntas_3_b4 * qtd_professores_3_b4)
     total_respostas_b4 = qtd_respostas_2_b4 + qtd_respostas_5_b4 + qtd_respostas_9_b4 + qtd_respostas_3_b4
-    por_b4 = (total_respostas_b4 * 100) / total_perguntas_b4
+    if total_perguntas_b4 == 0:
+        por_b4 = 0
+    else:
+        por_b4 = (total_respostas_b4 * 100) / total_perguntas_b4
 
     #calculo geral
     total_perguntas_geral = total_perguntas_b1 + total_perguntas_b2 + total_perguntas_b3 + total_perguntas_b4
     total_respostas_geral = total_respostas_b1 + total_respostas_b2 + total_respostas_b3 + total_respostas_b4
-    por_geral = (total_respostas_geral * 100) / total_perguntas_geral
+
+    if total_perguntas_geral == 0:
+        por_geral = 0
+    else:
+        por_geral = (total_respostas_geral * 100) / total_perguntas_geral
 
     #calculo das series
     total_perguntas_2 = (qtd_perguntas_2_b1 * qtd_professores_2_b1) + (qtd_perguntas_2_b2 * qtd_professores_2_b2) + (qtd_perguntas_2_b3 * qtd_professores_2_b3) + (qtd_perguntas_2_b4 * qtd_professores_2_b4)
     total_respostas_2 = qtd_respostas_2_b1 + qtd_respostas_2_b2 + qtd_respostas_2_b3 + qtd_respostas_2_b4
-    por_2 = (total_respostas_2 * 100) / total_perguntas_2
+
+    if total_perguntas_2 == 0:
+        por_2 = 0
+    else:
+        por_2 = (total_respostas_2 * 100) / total_perguntas_2
 
     total_perguntas_5 = (qtd_perguntas_5_b1 * qtd_professores_5_b1) + (qtd_perguntas_5_b2 * qtd_professores_5_b2) + (qtd_perguntas_5_b3 * qtd_professores_5_b3) + (qtd_perguntas_5_b4 * qtd_professores_5_b4)
     total_respostas_5 = qtd_respostas_5_b1 + qtd_respostas_5_b2 + qtd_respostas_5_b3 + qtd_respostas_5_b4
-    por_5 = (total_respostas_5 * 100) / total_perguntas_5
+    if total_perguntas_5 == 0:
+        por_5 = 0
+    else:
+        por_5 = (total_respostas_5 * 100) / total_perguntas_5
+
+
 
     total_perguntas_9 = (qtd_perguntas_9_b1 * qtd_professores_9_b1) + (qtd_perguntas_9_b2 * qtd_professores_9_b2) + (qtd_perguntas_9_b3 * qtd_professores_9_b3) + (qtd_perguntas_9_b4 * qtd_professores_9_b4)
     total_respostas_9 = qtd_respostas_9_b1 + qtd_respostas_9_b2 + qtd_respostas_9_b3 + qtd_respostas_9_b4
-    por_9 = (total_respostas_9 * 100) / total_perguntas_9
+    if total_perguntas_9 == 0:
+        por_9 = 0
+    else:
+        por_9 = (total_respostas_9 * 100) / total_perguntas_9
+
 
     total_perguntas_3 = (qtd_perguntas_3_b1 * qtd_professores_3_b1) + (qtd_perguntas_3_b2 * qtd_professores_3_b2) + (qtd_perguntas_3_b3 * qtd_professores_3_b3) + (qtd_perguntas_3_b4 * qtd_professores_3_b4)
     total_respostas_3 = qtd_respostas_3_b1 + qtd_respostas_3_b2 + qtd_respostas_3_b3 + qtd_respostas_3_b4
-    por_3 = (total_respostas_3 * 100) / total_perguntas_3
+    if total_perguntas_3 == 0:
+        por_3 = 0
+    else:
+        por_3 = (total_respostas_3 * 100) / total_perguntas_3
 
     #Calculo por serie/bimestre
 
     total_perguntas_2_b1 = qtd_perguntas_2_b1 * qtd_professores_2_b1
-    por_2_b1 = (qtd_respostas_2_b1 * 100) / total_perguntas_2_b1
+    if total_perguntas_2_b1 == 0:
+        por_2_b1 = 0
+    else:
+        por_2_b1 = (qtd_respostas_2_b1 * 100) / total_perguntas_2_b1
 
     total_perguntas_2_b2 = qtd_perguntas_2_b2 * qtd_professores_2_b2
-    por_2_b2 = (qtd_respostas_2_b2 * 100) / total_perguntas_2_b2
+    if total_perguntas_2_b2 == 0:
+        por_2_b2 = 0
+    else:
+        por_2_b2 = (qtd_respostas_2_b2 * 100) / total_perguntas_2_b2
+
+
 
     total_perguntas_2_b3 = qtd_perguntas_2_b3 * qtd_professores_2_b3
-    por_2_b3 = (qtd_respostas_2_b3 * 100) / total_perguntas_2_b3
+    if total_perguntas_2_b3 == 0:
+        por_2_b3 = 0
+    else:
+        por_2_b3 = (qtd_respostas_2_b3 * 100) / total_perguntas_2_b3
+
+
 
     total_perguntas_2_b4 = qtd_perguntas_2_b4 * qtd_professores_2_b4
-    por_2_b4 = (qtd_respostas_2_b4 * 100) / total_perguntas_2_b4
+    if total_perguntas_2_b4 == 0:
+        por_2_b4 = 0
+    else:
+        por_2_b4 = (qtd_respostas_2_b4 * 100) / total_perguntas_2_b4
 
 
     total_perguntas_5_b1 = qtd_perguntas_5_b1 * qtd_professores_5_b1
-    por_5_b1 = (qtd_respostas_5_b1 * 100) / total_perguntas_5_b1
+    if total_perguntas_5_b1 == 0:
+        por_5_b1 = 0
+    else:
+        por_5_b1 = (qtd_respostas_5_b1 * 100) / total_perguntas_5_b1
+
 
     total_perguntas_5_b2 = qtd_perguntas_5_b2 * qtd_professores_5_b2
-    por_5_b2 = (qtd_respostas_5_b2 * 100) / total_perguntas_5_b2
+    if total_perguntas_5_b2 == 0:
+        por_5_b2 = 0
+    else:
+        por_5_b2 = (qtd_respostas_5_b2 * 100) / total_perguntas_5_b2
+
 
     total_perguntas_5_b3 = qtd_perguntas_5_b3 * qtd_professores_5_b3
-    por_5_b3 = (qtd_respostas_5_b3 * 100) / total_perguntas_5_b3
+    if total_perguntas_5_b3 == 0:
+        por_5_b3 = 0
+    else:
+        por_5_b3 = (qtd_respostas_5_b3 * 100) / total_perguntas_5_b3
+
+
 
     total_perguntas_5_b4 = qtd_perguntas_5_b4 * qtd_professores_5_b4
-    por_5_b4 = (qtd_respostas_5_b4 * 100) / total_perguntas_5_b4
+    if total_perguntas_5_b4 == 0:
+        por_5_b4 = 0
+    else:
+        por_5_b4 = (qtd_respostas_5_b4 * 100) / total_perguntas_5_b4
 
 
     total_perguntas_9_b1 = qtd_perguntas_9_b1 * qtd_professores_9_b1
-    por_9_b1 = (qtd_respostas_9_b1 * 100) / total_perguntas_9_b1
+    if total_perguntas_9_b1 == 0:
+        por_9_b1 = 0
+    else:
+        por_9_b1 = (qtd_respostas_9_b1 * 100) / total_perguntas_9_b1
+
+
 
     total_perguntas_9_b2 = qtd_perguntas_9_b2 * qtd_professores_9_b2
-    por_9_b2 = (qtd_respostas_9_b2 * 100) / total_perguntas_9_b2
+    if total_perguntas_9_b2 == 0:
+        por_9_b2 = 0
+    else:
+        por_9_b2 = (qtd_respostas_9_b2 * 100) / total_perguntas_9_b2
+
+
 
     total_perguntas_9_b3 = qtd_perguntas_9_b3 * qtd_professores_9_b3
-    por_9_b3 = (qtd_respostas_9_b3 * 100) / total_perguntas_9_b3
+    if total_perguntas_9_b3 == 0:
+        por_9_b3 = 0
+    else:
+        por_9_b3 = (qtd_respostas_9_b3 * 100) / total_perguntas_9_b3
+
 
     total_perguntas_9_b4 = qtd_perguntas_9_b4 * qtd_professores_9_b4
-    por_9_b4 = (qtd_respostas_9_b4 * 100) / total_perguntas_9_b4
+    if total_perguntas_9_b4 == 0:
+        por_9_b4 = 0
+    else:
+        por_9_b4 = (qtd_respostas_9_b4 * 100) / total_perguntas_9_b4
 
 
 
     total_perguntas_3_b1 = qtd_perguntas_3_b1 * qtd_professores_3_b1
-    por_3_b1 = (qtd_respostas_3_b1 * 100) / total_perguntas_3_b1
+    if total_perguntas_3_b1 == 0:
+        por_3_b1 = 0
+    else:
+        por_3_b1 = (qtd_respostas_3_b1 * 100) / total_perguntas_3_b1
+
+
 
     total_perguntas_3_b2 = qtd_perguntas_3_b2 * qtd_professores_3_b2
-    por_3_b2 = (qtd_respostas_3_b2 * 100) / total_perguntas_3_b2
+    if total_perguntas_3_b2 == 0:
+        por_3_b2 = 0
+    else:
+        por_3_b2 = (qtd_respostas_3_b2 * 100) / total_perguntas_3_b2
+
+
 
     total_perguntas_3_b3 = qtd_perguntas_3_b3 * qtd_professores_3_b3
-    por_3_b3 = (qtd_respostas_3_b3 * 100) / total_perguntas_3_b3
+    if total_perguntas_3_b3 == 0:
+        por_3_b3 = 0
+    else:
+        por_3_b3 = (qtd_respostas_3_b3 * 100) / total_perguntas_3_b3
+
+
 
     total_perguntas_3_b4 = qtd_perguntas_3_b4 * qtd_professores_3_b4
-    por_3_b4 = (qtd_respostas_3_b4 * 100) / total_perguntas_3_b4
+    if total_perguntas_3_b4 == 0:
+        por_3_b4 = 0
+    else:
+        por_3_b4 = (qtd_respostas_3_b4 * 100) / total_perguntas_3_b4
 
 
     #Calculo por jurisdicao
@@ -1403,7 +1581,11 @@ def getCumprimento(request):
     total_respostas_9_cap = qtd_respostas_9_b1_cap + qtd_respostas_9_b2_cap + qtd_respostas_9_b3_cap + qtd_respostas_9_b4_cap
     total_respostas_3_cap = qtd_respostas_3_b1_cap + qtd_respostas_3_b2_cap + qtd_respostas_3_b3_cap + qtd_respostas_3_b4_cap
     total_respostas_cap = total_respostas_2_cap + total_respostas_5_cap + total_respostas_9_cap + total_respostas_3_cap
-    por_cap = (total_respostas_cap * 100) / total_perguntas_cap
+
+    if total_perguntas_cap == 0 :
+        por_cap = 0
+    else:
+        por_cap = (total_respostas_cap * 100) / total_perguntas_cap
 
 
     total_perguntas_2_int = (qtd_perguntas_2_b1*qtd_professores_2_b1_int)+(qtd_perguntas_2_b2*qtd_professores_2_b2_int)+(qtd_perguntas_2_b3*qtd_professores_2_b3_int)+(qtd_perguntas_2_b4*qtd_professores_2_b4_int)
@@ -1416,17 +1598,30 @@ def getCumprimento(request):
     total_respostas_9_int = qtd_respostas_9_b1_int + qtd_respostas_9_b2_int + qtd_respostas_9_b3_int + qtd_respostas_9_b4_int
     total_respostas_3_int = qtd_respostas_3_b1_int + qtd_respostas_3_b2_int + qtd_respostas_3_b3_int + qtd_respostas_3_b4_int
     total_respostas_int = total_respostas_2_int + total_respostas_5_int + total_respostas_9_int + total_respostas_3_int
-    por_int = (total_respostas_int * 100) / total_perguntas_int
+    if total_perguntas_int == 0:
+        por_int = 0
+    else:
+        por_int = (total_respostas_int * 100) / total_perguntas_int
 
-    por_juris_cap = (total_respostas_cap * 100) / (total_respostas_cap + total_respostas_int)
+    if (total_respostas_cap + total_respostas_int) == 0:
+        por_juris_cap = 0
+    else:
+        por_juris_cap = (total_respostas_cap * 100) / (total_respostas_cap + total_respostas_int)
 
     #cumprimento do curriculo por nivel de ensino
     total_perguntas_em = total_perguntas_3_b1 + total_perguntas_3_b2 + total_perguntas_3_b3 + total_perguntas_3_b4
     total_perguntas_ef = total_perguntas_2_b1 + total_perguntas_2_b2 + total_perguntas_2_b3 + total_perguntas_2_b4 + total_perguntas_5_b1 + total_perguntas_5_b2 + total_perguntas_5_b3 + total_perguntas_5_b4 + total_perguntas_9_b1 + total_perguntas_9_b2 + total_perguntas_9_b3 + total_perguntas_9_b4
     total_respostas_em = qtd_respostas_3_b1 + qtd_respostas_3_b2 + qtd_respostas_3_b3 + qtd_respostas_3_b4
     total_respostas_ef = qtd_respostas_2_b1 + qtd_respostas_2_b2 + qtd_respostas_2_b3 + qtd_respostas_2_b4 + qtd_respostas_5_b1 + qtd_respostas_5_b2 + qtd_respostas_5_b3 + qtd_respostas_5_b4 + qtd_respostas_9_b1 + qtd_respostas_9_b2 + qtd_respostas_9_b3 + qtd_respostas_9_b4
-    por_cumprimento_em = (total_respostas_em * 100) / total_perguntas_em
-    por_cumprimento_ef = (total_respostas_ef * 100) / total_perguntas_ef
+
+    if total_perguntas_em == 0:
+        por_cumprimento_em = 0
+    else:
+        por_cumprimento_em = (total_respostas_em * 100) / total_perguntas_em
+    if total_perguntas_ef == 0:
+        por_cumprimento_ef = 0
+    else:
+        por_cumprimento_ef = (total_respostas_ef * 100) / total_perguntas_ef
 
 
 
@@ -1453,8 +1648,15 @@ def getCumprimento(request):
     total_respostas_mt = total_respostas_2_mt + total_respostas_5_mt + total_respostas_9_mt + total_respostas_3_mt
     total_respostas_pt = total_respostas_2_pt + total_respostas_5_pt + total_respostas_9_pt + total_respostas_3_pt
 
-    por_mt = (total_respostas_mt * 100) / total_perguntas_mt
-    por_pt = (total_respostas_pt * 100) / total_perguntas_pt
+    if total_perguntas_mt == 0 :
+        por_mt = 0
+    else:
+        por_mt = (total_respostas_mt * 100) / total_perguntas_mt
+    if total_perguntas_pt == 0 :
+        por_pt = 0
+    else:
+        por_pt = (total_respostas_pt * 100) / total_perguntas_pt
+
 
 
     data_json={
@@ -1519,6 +1721,7 @@ def getCumprimento(request):
 
 
 # coordenadoria cumprimento
+@login_required
 def coordenadoria_cumprimento(request):
     coordenadorias =Coordenadoria.objects.all().order_by('id')
     respostas = []
@@ -1574,7 +1777,10 @@ def coordenadoria_cumprimento(request):
             calculo = 0
             por_coord.append(calculo)
         else:
-            calculo = (qtd_respostas[i] * 100) / (qtd_perguntas[i] * qtd_professores[i])
+            if (qtd_perguntas[i] * qtd_professores[i]) == 0 :
+                calculo = 0
+            else :
+                calculo = (qtd_respostas[i] * 100) / (qtd_perguntas[i] * qtd_professores[i])
             por_coord.append("%.2f" % calculo)
 
     cap_coord = []
@@ -1594,5 +1800,112 @@ def coordenadoria_cumprimento(request):
     }
     return JsonResponse(data_json)
 
+#escolas controle
+@login_required
+def grap_escolas(request):
 
+    escolas = Escola.objects.raw('SELECT * FROM app_escola')
+    qtd_escolas = len(escolas)
+    escolas_visitadas_v = Resposta.objects.raw('SELECT * FROM app_resposta as r JOIN app_professor as p on p.id = r.professor_id JOIN app_escola as e on e.id = escola_id WHERE r.resposta = 1 and foi_possivel = 1 group by escola_id;')
+    escolas_visitadas_falso = Resposta.objects.raw('SELECT * FROM app_resposta as r JOIN app_professor as p on p.id = r.professor_id JOIN app_escola as e on e.id = escola_id WHERE r.resposta = 0 and foi_possivel = 0 group by escola_id;')
+    qtd_escolas_visitadas = len(escolas_visitadas_v)
+    escolas_visitadas = Resposta.objects.raw('SELECT * FROM app_resposta as r JOIN app_professor as p on p.id = r.professor_id JOIN app_escola as e on e.id = escola_id  group by escola_id;')
+    qtd_escolas_visitadas_v_f = len(escolas_visitadas)
+    por_escolas_visitadas = (qtd_escolas_visitadas_v_f* 100)/qtd_escolas
+    por_escolas_visitadas_sim = (qtd_escolas_visitadas*100)/qtd_escolas_visitadas_v_f
+    qtd_escolas_visitadas_f = len(escolas_visitadas_falso)
+
+    motivos = ["Escola exclusivamente em atividade remota","Escola no período de coleta sem atividade presencial","Professor ausente ou de atestado/licença","Professor afastado","Professor se recusou a participar da entrevista","Outros"]
+    qtd_motivos =[]
+    for motivo in motivos:
+        qtd_motivo =0
+        for escola in escolas_visitadas_falso:
+            if motivo == escola.motivo:
+                qtd_motivo += 1
+        qtd_motivos.append(qtd_motivo)
+    por_motivo = []
+    for i in range(6):
+        if qtd_escolas_visitadas_f == 0 :
+            calculo_por = 0
+        else :
+            calculo_por = (qtd_motivos[i]*100)/qtd_escolas_visitadas_f
+        por_motivo.append("%.2f" % calculo_por)
+
+
+
+    data_json={
+        'por_escolas_visitadas': "%.2f" % por_escolas_visitadas,
+        'por_escolas_nao_visitadas': "%.2f" % (100 - por_escolas_visitadas),
+        'por_escolas_visitadas_sim': "%.2f" % por_escolas_visitadas_sim,
+        'por_escolas_visitadas_nao': "%.2f" % (100 - por_escolas_visitadas_sim),
+        'motivos': motivos,
+        'por_motivo': por_motivo,
+    }
+
+    return JsonResponse(data_json)
+
+@login_required
+def getRelatorio(request):
+    escolas_visitadas = Resposta.objects.raw('SELECT * FROM app_resposta as r JOIN app_professor as p on p.id = r.professor_id JOIN app_escola as e on e.id = escola_id group by escola_id;')
+    escolas_visitadas_falso = Resposta.objects.raw('SELECT * FROM app_resposta as r JOIN app_professor as p on p.id = r.professor_id JOIN app_escola as e on e.id = escola_id WHERE  foi_possivel = 0 group by professor_id;')
+    qtd_escolas_visitadas = len(escolas_visitadas)
+    qtd_escolas_visitadas_f = len(escolas_visitadas_falso)
+    context ={
+        'qtd_escolas_visitadas': qtd_escolas_visitadas,
+        'qtd_escolas_visitadas_f': qtd_escolas_visitadas_f,
+    }
+    return render(request, "relatorio.html", context)
+
+@login_required
+def lista_escolas(request):
+
+    # Conexão com o banco de dados MySQL
+    cnx = mysql.connector.connect(user='root', password='1234',
+                                  host='localhost', database='agora_vai')
+    cursor = cnx.cursor()
+
+    # Execução da consulta
+    query = 'SELECT escola FROM agora_vai.app_resposta as r JOIN agora_vai.app_professor as p on p.id =r.professor_id JOIN agora_vai.app_escola as e on e.id = escola_id group by escola;'
+    cursor.execute(query)
+    result = cursor.fetchall()
+
+    # Criação do objeto DataFrame
+    df = pd.DataFrame(result, columns=['Escola'])
+
+    # Salva a tabela em um arquivo Excel
+    writer = pd.ExcelWriter('tabela_escolas_visitadas.xlsx', engine='openpyxl')
+    df.to_excel(writer, index=False)
+    writer.close()
+
+    # Retorna o arquivo Excel como um HttpResponse
+    with open('tabela_escolas_visitadas.xlsx', 'rb') as file:
+        response = HttpResponse(file.read(), content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=tabela_escolas_visitadas.xlsx'
+        return response
+
+@login_required
+def lista_escolas_recusadas(request):
+    # Conexão com o banco de dados MySQL
+    cnx = mysql.connector.connect(user='root', password='1234',
+                                  host='localhost', database='agora_vai')
+    cursor = cnx.cursor()
+
+    # Execução da consulta
+    query = 'SELECT nome,motivo,escola FROM agora_vai.app_resposta as r JOIN agora_vai.app_professor as p on p.id =r.professor_id JOIN agora_vai.app_escola as e on e.id = escola_id WHERE foi_possivel = 0 group by professor_id;'
+    cursor.execute(query)
+    result = cursor.fetchall()
+
+    # Criação do objeto DataFrame
+    df = pd.DataFrame(result, columns=['Professor','Motivo','Escola'])
+
+    # Salva a tabela em um arquivo Excel
+    writer = pd.ExcelWriter('tabela_Professores_nao_responderam.xlsx', engine='openpyxl')
+    df.to_excel(writer, index=False)
+    writer.close()
+
+    # Retorna o arquivo Excel como um HttpResponse
+    with open('tabela_Professores_nao_responderam.xlsx', 'rb') as file:
+        response = HttpResponse(file.read(), content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=tabela_Professores_nao_responderam.xlsx'
+        return response
 

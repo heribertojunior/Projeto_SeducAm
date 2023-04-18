@@ -2,5 +2,135 @@
 {% load static %}
 
 {% block conteudo %}
+<body>
+
+    <div class="container">
+        <center>
+
+    <div class="col" style="margin-bottom: 5vh;">
+        <h3>Página de Acompanhamento</h3>
+        <p>Foram visitadas <jao style="color: blue;">{{qtd_escolas_visitadas}}</jao> escolas.</p>
+        <p><jao style="color: red;">{{qtd_escolas_visitadas_f}}</jao> professores não quiseram responder</p>
+        <button class = 'btn btn-primary' style="margin-top: 10px;width:300px"><a class ='text-white' href="{% url 'lista_escolas' %}">Lista de Escolas Visitadas</a></button>
+        <button class = 'btn btn-info' style="margin-top: 10px;width:300px"><a class ='text-white' href="{% url 'lista_escolas_recusadas' %}">Escolas que não responderam </a></button>
+    </div>
+    <hr>
+    <div class="row" style="margin-bottom: 5vh;">
+        <div class="col" style= "position: relative;  height: 30vh; width: 100vw; margin-bottom: 5vh;">
+            <h5 class="center">Escolas Visitadas</h5>
+            <canvas id="visita_escolas" ></canvas>
+        </div>
+        <div class="col" style= "position: relative;  height: 30vh; width: 100vw; margin-bottom: 5vh;">
+            <h5 class="center">Professor Respondeu</h5>
+            <canvas id="visita_escolas_sim" ></canvas>
+         </div>
+
+        <div class="col" style= "position: relative; height: 40vh; width: 150vw; margin-bottom: 5vh;"">
+            <h5 class="center">Motivos da Não-Coleta:</h5>
+            <canvas id="visita_escolas_motivos" style="margin-top: -3vh;"></canvas>
+        </div>
+    </div>
+    </center>
+    </div>
+</body>
 
 {% endblock conteudo %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+
+  function renderiza_visita_escolas(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+    const ctx = document.getElementById('visita_escolas').getContext('2d');
+
+    let dados = {
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: [data.por_escolas_visitadas, data.por_escolas_nao_visitadas],
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor: ['rgb(32, 47, 88)' ,'rgb(87, 108, 188)']
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+       labels: ['Visitadas', 'Não Visitadas']
+     };
+
+     let meuDonutChart = new Chart(ctx, {
+        type: 'pie',
+        data: dados
+      });
+
+    });
+  }
+
+  function renderiza_visita_escolas_sim(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+    const ctx = document.getElementById('visita_escolas_sim').getContext('2d');
+
+    let dados = {
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: [data.por_escolas_visitadas_sim, data.por_escolas_visitadas_nao],
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor: ['rgb(32, 47, 88)' ,'rgb(87, 108, 188)']
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+       labels: ['Professores Responderam', 'Professores não Responderam']
+     };
+
+     let meuDonutChart = new Chart(ctx, {
+        type: 'pie',
+        data: dados
+      });
+
+    });
+  }
+
+  function renderiza_motivos(url){
+  fetch(url, {
+    method: 'get',
+  }).then(function(result){
+    return result.json()
+  }).then(function(data){
+    const ctx = document.getElementById('visita_escolas_motivos').getContext('2d');
+    let cores =["#191970", "#0000FF", "#6495ED", "#00BFFF", "#1E90FF", "#576cbc"]
+    let dados = {
+      datasets: [{
+          // cria-se um vetor data, com os valores a ser dispostos no gráfico
+            data: data.por_motivo,
+          // cria-se uma propriedade para adicionar cores aos respectivos valores do vetor data
+           backgroundColor:["#191970", "#0000FF", "#6495ED", "#00BFFF", "#1E90FF", "#576CBC"]
+        }],
+       // cria-se legendas para os respectivos valores do vetor data
+       labels: data.motivos
+     };
+    let options = {
+      plugins: {
+        legend: {
+          position: 'right',
+        },
+      }
+    }
+     let meuDonutChart = new Chart(ctx, {
+        type: 'pie',
+        data: dados,
+        options: options
+      });
+
+    });
+  }
+
+  window.onload = function(event) {
+    renderiza_visita_escolas('{% url "grap_escolas" %}')
+    renderiza_visita_escolas_sim('{% url "grap_escolas" %}')
+    renderiza_motivos('{% url "grap_escolas" %}')
+  };
+  </script>
+  {% endblock scripts %}

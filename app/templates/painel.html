@@ -5,7 +5,6 @@
 <body>
  <main>
     <div class="row justify-content-center" style="margin-top: 5%">
-
         <strong style="font-size: 30px;"> Painel de Controle </strong>
     </div>
 
@@ -15,9 +14,9 @@
     <div class="row justify-content-center">
         <button class = 'btn btn-primary' style="margin-top: 10px;width:100px"><a class ='text-white' href="{% url 'dashboard' %}">Gráficos</a></button>
     </div>
-    {% if request.user.is_superuser %}
+    {% if request.user.is_staff %}
     <div class="row justify-content-center">
-        <button class = 'btn btn-primary' style="margin-top: 10px;width:100px"><a class ='text-white' href="{% url 'relatorio' %}">Relatório</a></button>
+        <button class = 'btn btn-info' style="margin-top: 10px;width:100px"><a class ='text-white' href="{% url 'relatorio' %}">Relatório</a></button>
     </div>
     {% endif %}
  </main>
